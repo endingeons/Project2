@@ -46,10 +46,10 @@ int main(int argc, char *argv[]){
 	pthread_attr_init(&attr);
 	pthread_mutex_init (&lock, NULL);
 	getCSVfilenames();
-	for(int i = 0; i < NUM_FILES; i++){
-		printf("%d\t", i+1);
-		printf("%s\n",analcatdata_filenames[i]);
-	}
+	// for(int i = 0; i < NUM_FILES; i++){
+	// 	printf("%d\t", i+1);
+	// 	printf("%s\n",analcatdata_filenames[i]);
+	// }
 
 	/* Parse user input for program options*/
 	// if(!strcmp(argv[1], "single"))
@@ -113,23 +113,23 @@ void *runner1(void *param)
 	int done = 0;
 	int task = 1;
 	char * filename;
-	//for(int i = 0; i<NUM_FILES; i++){
-		char *csvfile = malloc(50*sizeof(char));
+	for(int i = 0; i<NUM_FILES; ++i){
+		char *csvfile = malloc(60*sizeof(char));
 		char **parsed;
-		//filename = analcatdata_filenames[i];
-		filename = "AIDS.csv";
-		strcat(csvfile,"analcatdata/");
-		strcat(csvfile,filename);
-		printf("%s\n",csvfile);
-		FILE *fp = fopen(csvfile, "r"); // CSV file we are reading from
-		while(done == 0){
-			done = parseCSV(csvfile, task, parsed, fp);
-			/* Analyze the current parsed CSV line */
+		printf("%s\n", analcatdata_filenames[i]);
+		//filename = "AIDS.csv";
+		//strcat(csvfile,"analcatdata/");
+		//strcat(csvfile,analcatdata_filenames[i]);
+		//printf("%s\n",csvfile);
+		// FILE *fp = fopen(csvfile, "r"); // CSV file we are reading from
+		// while(done == 0){
+		// 	done = parseCSV(csvfile, task, parsed, fp);
+		// 	/* Analyze the current parsed CSV line */
 
-		}
+		// }
 		free(csvfile);
-		fclose(fp);
-	//}
+		//fclose(fp);
+	}
 	
 	printf("=== T1 Completed ===\n");
 	/* do the reporting */
@@ -163,15 +163,15 @@ void *runner2(void *param)
 		filename = "AIDS.csv";
 		strcat(csvfile,"analcatdata/");
 		strcat(csvfile,filename);
-		printf("%s\n",csvfile);
-		FILE *fp = fopen(csvfile, "r"); // CSV file we are reading from
-		while(done == 0){
-			done = parseCSV(csvfile, task, parsed, fp);
-			/* Analyze the current parsed CSV line */
+		//printf("%s\n",csvfile);
+		// FILE *fp = fopen(csvfile, "r"); // CSV file we are reading from
+		// while(done == 0){
+		// 	done = parseCSV(csvfile, task, parsed, fp);
+		// 	/* Analyze the current parsed CSV line */
 
-		}
+		// }
 		free(csvfile);
-		fclose(fp);
+		// fclose(fp);
 	//}
 	printf("=== T2 Completed ===\n");
 	/* do the reporting */
@@ -203,15 +203,15 @@ void *runner3(void *param)
 		filename = "AIDS.csv";
 		strcat(csvfile,"analcatdata/");
 		strcat(csvfile,filename);
-		printf("%s\n",csvfile);
-		FILE *fp = fopen(csvfile, "r"); // CSV file we are reading from
-		while(done == 0){
-			done = parseCSV(csvfile, task, parsed, fp);
-			/* Analyze the current parsed CSV line */
+		//printf("%s\n",csvfile);
+		// FILE *fp = fopen(csvfile, "r"); // CSV file we are reading from
+		// while(done == 0){
+		// 	done = parseCSV(csvfile, task, parsed, fp);
+		// 	/* Analyze the current parsed CSV line */
 
-		}
+		// }
 		free(csvfile);
-		fclose(fp);
+		// fclose(fp);
 	//}
 	printf("=== T3 Completed ===\n");
 	/* do the reporting */
@@ -238,9 +238,10 @@ int parseCSV(char *csvfile, int task, char **parsed, FILE *fp){
 	i = 0;	
 	while (parsed[i] != NULL) // prints out the parsed strings
 	{
-		printf("%s\n",parsed[i]);
+		//printf("%s\n",parsed[i]);
 		i++;
 	} 
+	//printf("Task: %d\n", task);
 	//printf("\n");
 	return done;  	
 }
@@ -262,10 +263,11 @@ void getCSVfilenames(){
 	  		continue;
 	  	if(!strcmp(ent ->d_name, "README"))
 	  		continue;
-
-	    // printf ("%s\t", ent->d_name);
-	    // printf("%d\n", i);
+	  	//printf("%s\n", ent->d_name);
+	  	size_t destination_size = sizeof(ent->d_name);
+	    analcatdata_filenames[i] = malloc(sizeof(char) * destination_size);
 	    analcatdata_filenames[i] = ent->d_name;
+	    //printf("%s\n", analcatdata_filenames[i]);
 	   
 	    i++;
 	  }
