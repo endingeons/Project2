@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <string.h>
-#include "csv_parser/csv.h"
+#include "CsvParser/include/csvparser.h"
 #include <sys/types.h>
 #include <dirent.h>
 
@@ -24,9 +24,8 @@ typedef enum priority_flag priority_flag_t;
 void *runner1(void *param);
 void *runner2(void *param);
 void *runner3(void *param);
-int parseCSV(char *csvfile, int task, char **parsed, FILE *fp);
+
 void getCSVfilenames();
-void analyzeCSV(char **parsed_input, int task);
 
 
 pthread_mutex_t lock;
@@ -110,25 +109,36 @@ void *runner1(void *param)
 	//int elapsedTime;
 	/* do some work ... */
 	// printf("Thread 1\n");
-	int done = 0;
-	int task = 1;
+
 	char * filename;
-	for(int i = 0; i<3; ++i){
-		char *csvfile = malloc(60*sizeof(char));
-		char **parsed;
-		//printf("%s\n", analcatdata_filenames[i]);
-		//filename = "AIDS.csv";
+	for(int i = 0; i<5; ++i)
+	{
+		char *csvfile = malloc(100*sizeof(char));
+
 		strcat(csvfile,"analcatdata/");
 		strcat(csvfile,analcatdata_filenames[i]);
-		//printf("%s\n",csvfile);
-		FILE *fp = fopen(csvfile, "r"); // CSV file we are reading from
-		while(done == 0){
-			done = parseCSV(csvfile, task, parsed, fp);
-			/* Analyze the current parsed CSV line */
+		
+    	int j;
+    //                                   file, delimiter, first_line_is_header?
+  	    CsvParser *csvparser = CsvParser_new(csvfile, ",", 0);
+    	CsvRow *row;
+    	
+		printf("READING FROM %s\n",csvfile);
 
-		}
+   		while ((row = CsvParser_getRow(csvparser)) ) 
+   		{
+        	const char **rowFields = CsvParser_getFields(row);
+        	for (j = 0 ; j < CsvParser_getNumFields(row) ; j++) 
+       		{
+            	printf("%s ", rowFields[j]);
+       		}
+			printf("\n");
+        	CsvParser_destroy_row(row);
+  		}
+    	CsvParser_destroy(csvparser);			
+
 		free(csvfile);
-		fclose(fp);
+
 	}
 	
 	printf("=== T1 Completed ===\n");
@@ -150,29 +160,41 @@ void *runner1(void *param)
 */
 void *runner2(void *param)
 {
+	//int elapsedTime;
 	/* do some work ... */
-	//printf("Thread 2\n");
-	//parseCSV("AIDS.csv");
-	int done = 0;
-	int task = 2;
-	char * filename;
-	//for(int i = 0; i<NUM_FILES; i++){
-		char *csvfile = malloc(50*sizeof(char));
-		char **parsed;
-		//filename = analcatdata_filenames[i];
-		filename = "AIDS.csv";
-		strcat(csvfile,"analcatdata/");
-		strcat(csvfile,filename);
-		//printf("%s\n",csvfile);
-		// FILE *fp = fopen(csvfile, "r"); // CSV file we are reading from
-		// while(done == 0){
-		// 	done = parseCSV(csvfile, task, parsed, fp);
-		// 	/* Analyze the current parsed CSV line */
+	// printf("Thread 1\n");
 
-		// }
+	char * filename;
+	for(int i = 0; i<5; ++i)
+	{
+		char *csvfile = malloc(100*sizeof(char));
+
+		strcat(csvfile,"analcatdata/");
+		strcat(csvfile,analcatdata_filenames[i]);
+		
+    	int j;
+    //                                   file, delimiter, first_line_is_header?
+  	    CsvParser *csvparser = CsvParser_new(csvfile, ",", 0);
+    	CsvRow *row;
+    	
+		printf("READING FROM %s\n",csvfile);
+
+   		while ((row = CsvParser_getRow(csvparser)) ) 
+   		{
+        	const char **rowFields = CsvParser_getFields(row);
+        	for (j = 0 ; j < CsvParser_getNumFields(row) ; j++) 
+       		{
+            	printf("%s ", rowFields[j]);
+       		}
+			printf("\n");
+        	CsvParser_destroy_row(row);
+  		}
+    	CsvParser_destroy(csvparser);			
+
 		free(csvfile);
-		// fclose(fp);
-	//}
+
+	}
+
 	printf("=== T2 Completed ===\n");
 	/* do the reporting */
 	pthread_mutex_lock(&lock); 
@@ -190,29 +212,41 @@ void *runner2(void *param)
 */
 void *runner3(void *param)
 {
+	//int elapsedTime;
 	/* do some work ... */
-	//printf("Thread 3\n");
-	//parseCSV("challenger.csv");
-	int task = 3;
-	int done = 0;
-	char * filename;
-	//for(int i = 0; i<NUM_FILES; i++){
-		char *csvfile = malloc(50*sizeof(char));
-		char **parsed;
-		//filename = analcatdata_filenames[i];
-		filename = "AIDS.csv";
-		strcat(csvfile,"analcatdata/");
-		strcat(csvfile,filename);
-		//printf("%s\n",csvfile);
-		// FILE *fp = fopen(csvfile, "r"); // CSV file we are reading from
-		// while(done == 0){
-		// 	done = parseCSV(csvfile, task, parsed, fp);
-		// 	/* Analyze the current parsed CSV line */
+	// printf("Thread 1\n");
 
-		// }
-		free(csvfile);
-		// fclose(fp);
-	//}
+	// char * filename;
+	// for(int i = 0; i<5; ++i)
+	// {
+	// 	char *csvfile = malloc(100*sizeof(char));
+
+	// 	strcat(csvfile,"analcatdata/");
+	// 	strcat(csvfile,analcatdata_filenames[i]);
+		
+ //    	int j;
+ //    //                                   file, delimiter, first_line_is_header?
+ //  	    CsvParser *csvparser = CsvParser_new(csvfile, ",", 0);
+ //    	CsvRow *row;
+    	
+	// 	printf("READING FROM %s\n",csvfile);
+
+ //   		while ((row = CsvParser_getRow(csvparser)) ) 
+ //   		{
+ //        	const char **rowFields = CsvParser_getFields(row);
+ //        	for (j = 0 ; j < CsvParser_getNumFields(row) ; j++) 
+ //       		{
+ //            	printf("%s ", rowFields[j]);
+ //       		}
+	// 		printf("\n");
+ //        	CsvParser_destroy_row(row);
+ //  		}
+ //    	CsvParser_destroy(csvparser);			
+
+	// 	free(csvfile);
+
+	// }
+	
 	printf("=== T3 Completed ===\n");
 	/* do the reporting */
 	pthread_mutex_lock(&lock); 
@@ -229,22 +263,6 @@ you can find some documentation there
 after compiling with make, you can run this with ./myparsertest AIDS.csv
 or with any of the csv files
 */
-
-int parseCSV(char *csvfile, int task, char **parsed, FILE *fp){
-	int err, done, i = 0;
-	char *line = fread_csv_line(fp, 1024, &done, &err); // reads a line from the CSV file
-	//printf("%s\n",line);
-	parsed = parse_csv(line); // array of strings from the current line of the CSV file
-	i = 0;	
-	while (parsed[i] != NULL) // prints out the parsed strings
-	{
-		printf("%s\n",parsed[i]);
-		i++;
-	} 
-	//printf("Task: %d\n", task);
-	//printf("\n");
-	return done;  	
-}
 
 /* Initialize an array with all of the filenames in the directory*/
 /* https://stackoverflow.com/questions/612097/how-can-i-get-the-list-of-files-in-a-directory-using-c-or-c */
