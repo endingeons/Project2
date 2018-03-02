@@ -113,22 +113,22 @@ void *runner1(void *param)
 	int done = 0;
 	int task = 1;
 	char * filename;
-	for(int i = 0; i<NUM_FILES; ++i){
+	for(int i = 0; i<3; ++i){
 		char *csvfile = malloc(60*sizeof(char));
 		char **parsed;
-		printf("%s\n", analcatdata_filenames[i]);
+		//printf("%s\n", analcatdata_filenames[i]);
 		//filename = "AIDS.csv";
-		//strcat(csvfile,"analcatdata/");
-		//strcat(csvfile,analcatdata_filenames[i]);
+		strcat(csvfile,"analcatdata/");
+		strcat(csvfile,analcatdata_filenames[i]);
 		//printf("%s\n",csvfile);
-		// FILE *fp = fopen(csvfile, "r"); // CSV file we are reading from
-		// while(done == 0){
-		// 	done = parseCSV(csvfile, task, parsed, fp);
-		// 	/* Analyze the current parsed CSV line */
+		FILE *fp = fopen(csvfile, "r"); // CSV file we are reading from
+		while(done == 0){
+			done = parseCSV(csvfile, task, parsed, fp);
+			/* Analyze the current parsed CSV line */
 
-		// }
+		}
 		free(csvfile);
-		//fclose(fp);
+		fclose(fp);
 	}
 	
 	printf("=== T1 Completed ===\n");
@@ -238,7 +238,7 @@ int parseCSV(char *csvfile, int task, char **parsed, FILE *fp){
 	i = 0;	
 	while (parsed[i] != NULL) // prints out the parsed strings
 	{
-		//printf("%s\n",parsed[i]);
+		printf("%s\n",parsed[i]);
 		i++;
 	} 
 	//printf("Task: %d\n", task);
@@ -265,8 +265,8 @@ void getCSVfilenames(){
 	  		continue;
 	  	//printf("%s\n", ent->d_name);
 	  	size_t destination_size = sizeof(ent->d_name);
-	    analcatdata_filenames[i] = malloc(sizeof(char) * destination_size);
-	    analcatdata_filenames[i] = ent->d_name;
+	    analcatdata_filenames[i] = (char*)malloc(sizeof(char) * destination_size);
+	    strcpy(analcatdata_filenames[i], ent->d_name);
 	    //printf("%s\n", analcatdata_filenames[i]);
 	   
 	    i++;
