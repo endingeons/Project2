@@ -32,6 +32,12 @@ void analyzeCSV(char **parsed_input, int task);
 pthread_mutex_t lock;
 char * analcatdata_filenames[NUM_FILES];
 
+typedef struct uniqueWord
+{
+	char* word;
+	struct uniqueWord* next;
+} uniqueWord;
+
 int main(int argc, char *argv[]){
 	pthread_t tid_task[NUM_THREADS];
 	pthread_attr_t attr;
@@ -118,7 +124,7 @@ void *runner1(void *param)
 
 		strcat(csvfile,"analcatdata/");
 		strcat(csvfile,analcatdata_filenames[i]);
-		
+
     	int j;
     //                                   file, delimiter, first_line_is_header?
   	    CsvParser *csvparser = CsvParser_new(csvfile, ",", 0);
