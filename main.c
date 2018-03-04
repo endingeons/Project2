@@ -265,11 +265,7 @@ void *runner1(void *param)
 							} 
 
 						}
-						
-
-						currentWord = &fieldCopy[b+1]; // Move on to the next word
-
-						
+						currentWord = &fieldCopy[b+1]; // Move on to the next word	
 					}
 					b++;
 					
@@ -394,47 +390,147 @@ void *runner2(void *param)
 	    Also, find maximum, minimum, average of the numbers of rows and columns of 
 	    all files. 
 */
+
+int getNumRows(char* filename)
+{
+  	CsvParser *csvparser = CsvParser_new(filename, ",", 0);
+    CsvRow *row;	
+    int num;
+
+   		while ((row = CsvParser_getRow(csvparser)) ) 
+   		{
+        	num++;
+        	CsvParser_destroy_row(row);
+  		}
+    	CsvParser_destroy(csvparser);	
+
+    	return num;
+
+}
+
 void *runner3(void *param)
 {
 	//int elapsedTime;
 	/* do some work ... */
-	// printf("Thread 1\n");
+	// printf("Thread 3\n");
 
-	// char * filename;
-	// for(int i = 0; i<5; ++i)
-	// {
-	// 	char *csvfile = malloc(100*sizeof(char));
-
-	// 	strcat(csvfile,"analcatdata/");
-	// 	strcat(csvfile,analcatdata_filenames[i]);
-		
- //    	int j;
- //    //                                   file, delimiter, first_line_is_header?
- //  	    CsvParser *csvparser = CsvParser_new(csvfile, ",", 0);
- //    	CsvRow *row;
-    	
-	// 	printf("READING FROM %s\n",csvfile);
-
- //   		while ((row = CsvParser_getRow(csvparser)) ) 
- //   		{
- //        	const char **rowFields = CsvParser_getFields(row);
- //        	for (j = 0 ; j < CsvParser_getNumFields(row) ; j++) 
- //       		{
- //            	printf("%s ", rowFields[j]);
- //       		}
-	// 		printf("\n");
- //        	CsvParser_destroy_row(row);
- //  		}
- //    	CsvParser_destroy(csvparser);			
-
-	// 	free(csvfile);
-
-	// }
+	double ratioPerFile[NUM_FILES];
 	
+	
+	int rowcount;
+	int numMissing;
+
+	for(int i = 0; i<NUM_FILES; ++i)
+	{
+		rowcount = 0;
+		numMissing = 0;
+		char *csvfile = malloc(100*sizeof(char));
+
+		strcat(csvfile,"analcatdata/");
+		strcat(csvfile,analcatdata_filenames[i]);
+
+
+		
+    	int j;
+    //                                   file, delimiter, first_line_is_header?
+  	    CsvParser *csvparser = CsvParser_new(csvfile, ",", 0);
+    	CsvRow *row;
+    	int maxColumns = 0;
+
+    	// First, find the number of rows and the maximum number of columns.
+
+   		while ((row = CsvParser_getRow(csvparser)) ) 
+   		{
+   			pthread_mutex_unlock(&lock);
+   			rowcount++;
+   			pthread_mutex_unlock(&lock);
+        	const char **rowFields = CsvParser_getFields(row);
+
+        	if (CsvParser_getNumFields(row) > maxColumns)
+        	{
+        		pthread_mutex_lock(&lock);
+        		maxColumns = CsvParser_getNumFields(row);
+        		pthread_mutex_unlock(&lock);
+        	}
+
+
+        	CsvParser_destroy_row(row);
+  		}
+    	CsvParser_destroy(csvparser);			
+
+    	// Then get the number of missing or zero values. 
+
+  	    csvparser = CsvParser_new(csvfile, ",", 0);
+    	int numZero = 0;
+
+   		while ((row = CsvParser_getRow(csvparser)) ) 
+   		{
+        	const char **rowFields = CsvParser_getFields(row);
+        	// check for missing fields
+        	
+        	if (CsvParser_getNumFields(row) < maxColumns)
+        	{
+				pthread_mutex_lock(&lock);        		
+        		numMissing += (maxColumns - CsvParser_getNumFields(row));
+        		pthread_mutex_unlock(&lock);	
+        	}
+        	
+        	// check for zero values
+        	float val;
+        	bool validNum;
+         	for (j = 0 ; j < CsvParser_getNumFields(row) ; j++) 
+       		{
+            	const char* currentField = rowFields[j];
+            	validNum = true;
+            	// check if all digits or '.'
+            	for (int k = 0;k < strlen(currentField);k++)
+            	{
+            		if (!(isdigit(currentField[k]) || (currentField[k] == '.') ))
+            		{
+            			validNum = false;
+            		}
+            	}
+
+            	if (validNum)
+            	{
+            		val = atof(currentField);
+            		if (val == 0)
+            		{
+            			//printf("%s is %f\n",currentField,val);
+            			pthread_mutex_lock(&lock);
+            			numZero++;
+            			pthread_mutex_unlock(&lock);
+            		}
+            	}
+       		}
+			      	
+
+        	CsvParser_destroy_row(row);
+  		}
+    	CsvParser_destroy(csvparser);	
+
+		printf("READING FROM %s\n",csvfile);
+		printf("Missing: %d Zero: %d Num Rows: %d Num Cols: %d\n",numMissing,numZero,rowcount,maxColumns);
+
+		pthread_mutex_lock(&lock);
+    	double ratio = ((double)numMissing + (double)numZero) / ((double)maxColumns * (double)rowcount) * 100;
+    	ratioPerFile[i] = ratio;
+    	pthread_mutex_unlock(&lock);
+
+		free(csvfile);
+
+	}
+
 	printf("=== T3 Completed ===\n");
 	/* do the reporting */
 	pthread_mutex_lock(&lock); 
 	printf("=== T3 Report Start ===\n");
+
+	int i;
+	for (i = 0; i < NUM_FILES; i++)
+	{
+		printf("T3 RESULT: File %s: Ratio = %.2f\n",analcatdata_filenames[i],ratioPerFile[i]);
+	}
 
 	printf("=== T3 Report End ===\n");
 	pthread_mutex_unlock(&lock);
