@@ -163,14 +163,22 @@ void *runner2(void *param)
 	//int elapsedTime;
 	/* do some work ... */
 	// printf("Thread 1\n");
+	size_t total_alphanumeric_strings[NUM_FILES] = {0};
+	int min[NUM_FILES] = {0};
+	int max[NUM_FILES] = {0};
+	int avg[NUM_FILES = {0}];
+	int temp = 0;
+	float variance[NUM_FILES];
+
 
 	char * filename;
-	for(int i = 0; i<5; ++i)
+	char c;
+	for(int file_idx = 0; file_idx<NUM_FILES; ++file_idx)
 	{
 		char *csvfile = malloc(100*sizeof(char));
 
 		strcat(csvfile,"analcatdata/");
-		strcat(csvfile,analcatdata_filenames[i]);
+		strcat(csvfile,analcatdata_filenames[file_idx]);
 		
     	int j;
     //                                   file, delimiter, first_line_is_header?
@@ -184,9 +192,36 @@ void *runner2(void *param)
         	const char **rowFields = CsvParser_getFields(row);
         	for (j = 0 ; j < CsvParser_getNumFields(row) ; j++) 
        		{
-            	printf("%s ", rowFields[j]);
+       			for(int k = 0; j<strlen(rowFields[j][k]) - 1; ++k){
+		   			c = rowFields[j][k];
+		   			if(isalpha(c) && c != NULL){
+						//printf("%s is not a pure number because of '%c'.\n", rowFields[j], c);
+						++total_alphanumeric_strings[file_idx];
+						/* If first string of file, initalize min and max */
+						if(total_alphanumeric_strings[file_idx] == 1){
+							max[file_idx] = strlen(rowFields[j]);
+							min[file_idx] = strlen(rowFields[j]);
+						}
+						else{
+							temp = strlen(rowFields[j]);
+
+							 /* TODO: Find max, min, average, variance */
+							if(temp > max[file_idx])
+								max[file_idx] = temp;
+							if(temp < min[file_idx])
+								min[file_idx] = temp;
+							break;
+						}
+					}
+					else{ /* Pure number, DO NOTHING */
+						printf("%s is a pure number\n", rowFields[j]);
+
+					}
+				}
+            	//printf("%s ", rowFields[j]);
        		}
-			printf("\n");
+
+			//printf("\n");
         	CsvParser_destroy_row(row);
   		}
     	CsvParser_destroy(csvparser);			
