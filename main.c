@@ -16,10 +16,8 @@
 #define false 0
 
 /* Switch threading mode ./main single 1 (runs first task of 4)	./main multi*/
-enum threading_mode {SINGLE_THERAD, MULTI_THREAD};
-enum priority_flag {LOW = 0, HIGH = 1};
-typedef enum threading_mode threading_mode_t;
-typedef enum priority_flag priority_flag_t;
+typedef enum {SINGLE_THREAD, MULTI_THREAD} threading_mode_t;
+typedef enum {LOW = 0, HIGH = 1} priority_flag_t;
 	/* 	
 		Switch scheduling policy 
 		SCHED_OTHER, SCHED_RR, SCHED_FIFO
@@ -31,10 +29,10 @@ void *runner3(void *param);
 
 void getCSVfilenames();
 
-
-pthread_mutex_t lock;
+FILE *fp_output;
+pthread_mutex_t lock, write_lock;
 char * analcatdata_filenames[NUM_FILES];
-
+const char * output_filepath = "./output.txt";
 typedef struct uniqueWord
 {
 	char* word;
@@ -50,10 +48,12 @@ int main(int argc, char *argv[]){
 	threading_mode_t mode;
 	priority_flag_t priority;
 
+	void *(f[])  = {runner1, runner2, runner3};
 	/* TODO: Grant root privileges for policy and sched change */
 	/* get the default attributes */
 	pthread_attr_init(&attr);
 	pthread_mutex_init (&lock, NULL);
+	pthread_mutex_init (&write_lock, NULL);
 	getCSVfilenames();
 	// for(int i = 0; i < NUM_FILES; i++){
 	// 	printf("%d\t", i+1);
@@ -61,42 +61,66 @@ int main(int argc, char *argv[]){
 	// }
 
 	/* Parse user input for program options*/
-	// if(!strcmp(argv[1], "single"))
-	// {
-	// 	mode = SINGLE_THREAD;
-	// 	single_thread_task = atoi(argv[2]);
-	// analcatdata_filenames[NUM_FILES];}
-	// else if (!strcmp(argv[1], "multi")){
-	// 	mode = MULTI_THREAD;
-	// 	if (!strcmp(argv[2], "sched")){
-	// 		if(!strcmp(argv[3], "RR"))
-	// 			policy = SCHED_RR;
-	// 		else if(!strcmp(argv[3], "FIFO"))
-	// 			policy = SCHED_FIFO;
-	// 	}
-	// 	else if(!strcmp(argv[2], "priority")){
-	// 		priority_task = atoi(argv[3]);
-	// 		if(!strcmp(argv[4], "low"))
-	// 			priority = LOW;
-	// 		else if(!strcmp(argv[4], "high"))
-	// 			priority = HIGH;
-	// 	}
-	// }
-
+	if(!strcmp(argv[1], "single"))
+	{
+		mode = SINGLE_THREAD;
+		single_thread_task = atoi(argv[2]);
+	}
+	else if (!strcmp(argv[1], "multi")){
+		mode = MULTI_THREAD;
+		if (!strcmp(argv[2], "sched")){
+			if(!strcmp(argv[3], "RR"))
+				policy = SCHED_RR;
+			else if(!strcmp(argv[3], "FIFO"))
+				policy = SCHED_FIFO;
+			
+			else{
+				printf("Invalid scheduling algorithm. Please select RR or FIFO.\n");
+				exit(1);
+			}			
+		}
+		else if(!strcmp(argv[2], "priority")){
+			priority_task = atoi(argv[3]);
+			if(!strcmp(argv[4], "low"))
+				priority = LOW;
+			else if(!strcmp(argv[4], "high"))
+				priority = HIGH;
+		}
+		else{
+			printf("Invalid parameter.\n");
+			exit(1);
+		}
+	}
+	else{
+		printf("Please select a mode for running (single or multi threaded).\n");
+		exit(1);
+	}
 
 	if (pthread_attr_getschedpolicy(&attr, &policy) != 0)
 		fprintf(stderr, "Unable to get policy.\n");
+	
+	/* How many threads should run? */
+	if(mode == SINGLE_THREAD){
+		pthread_create(&tid_task[0],&attr,f[single_thread_task - 1], NULL);
+		pthread_join(tid_task[0], NULL);
+	}
+	else if(mode == MULTI_THREAD){
+		if(policy == SCHED_RR || policy == SCHED_FIFO){
+			if (pthread_attr_setschedpolicy(&attr, policy) != 0)
+				fprintf(stderr, "Unable to set policy.\n");
+		}
+		else if(priority == LOW){
+			/* Do we support priority change on all tasks or just one? Up to us...*/
+		}
+		else if(priority == HIGH){
 
-	if (pthread_attr_setschedpolicy(&attr, policy) != 0)
-			fprintf(stderr, "Unable to set policy.\n");
-
-	/* create the threads */
-	pthread_create(&tid_task[0],&attr,runner1, NULL);
-	pthread_create(&tid_task[1],&attr,runner2, NULL);
-	pthread_create(&tid_task[2],&attr,runner3, NULL);
-	/* join threads */
-	for (int i = 0; i < NUM_THREADS; i++)
-		pthread_join(tid_task[i], NULL);
+		}
+		pthread_create(&tid_task[0],&attr,runner1, NULL);
+		pthread_create(&tid_task[1],&attr,runner2, NULL);
+		pthread_create(&tid_task[2],&attr,runner3, NULL);
+		for (int i = 0; i < NUM_THREADS; i++)
+			pthread_join(tid_task[i], NULL);
+	}		
 
 	/* Print out results only when a Task finishes for all 84 files
 	   Print in order of completion, but do not interrupt any task
@@ -107,6 +131,7 @@ int main(int argc, char *argv[]){
 	   */	
 	printf("=== All Tasks Completed ===\n");
 	pthread_mutex_destroy(&lock);
+	pthread_mutex_destroy(&write_lock);
 	return 0;
 }
 
@@ -315,20 +340,35 @@ void *runner1(void *param)
 		free(csvfile);
 
 	}
-	
+
+	char buffer[100];
+	pthread_mutex_lock(&write_lock); 
+	fp_output = fopen(output_filepath,"ab");
+	int len = strlen("=== T1 Completed ===\n");
+	sprintf(buffer, "=== T1 Completed ===\n");
+	fputs(buffer, fp_output);
+	fclose(fp_output);	
+	buffer[0] = '\0';
+	pthread_mutex_unlock(&write_lock); 
 	printf("=== T1 Completed ===\n");
+
 	/* do the reporting */
 	pthread_mutex_lock(&lock); 
+	fp_output = fopen(output_filepath,"ab");
+	fputs("=== T1 Report Start ===\n", fp_output);
 	printf("=== T1 Report Start ===\n");
 	int i;
+
 	for (i = 0; i < NUM_FILES; i++)
 	{
-		printf("T1 RESULT: File %s: Total number of unique words: %d\n",analcatdata_filenames[i],uniquesPerFile[i]);
+		sprintf(buffer, "T1 RESULT: File %s: Total number of unique words: %d\n",analcatdata_filenames[i],uniquesPerFile[i]);
+		fputs(buffer,fp_output);
 	}
-
-
 	//printf("T1 RESULT: Total elapsed time: %d seconds\n", elapsedTime);
 	printf("=== T1 Report End ===\n");
+	buffer[0] = '\0';
+	sprintf(buffer, "=== T1 Report End ===\n");
+	fputs(buffer, fp_output);
 	pthread_mutex_unlock(&lock);
 	pthread_exit(0);
 }
@@ -343,23 +383,23 @@ void *runner2(void *param)
 	//int elapsedTime;
 	/* do some work ... */
 	// printf("Thread 1\n");
-	size_t total_alphanumeric_strings[NUM_FILES] = {0};
-	int min[NUM_FILES] = {0};
-	int max[NUM_FILES] = {0};
-	int avg[NUM_FILES = {0}];
-	int temp = 0;
-	float variance[NUM_FILES];
-
+	int min[NUM_FILES];
+	int max[NUM_FILES];
+	float avg[NUM_FILES] = {0};
+	float temp = 0;
+	float variance[NUM_FILES] = {0};
+	float exp_sos;
 
 	char * filename;
 	char c;
 	for(int file_idx = 0; file_idx<NUM_FILES; ++file_idx)
-	{
-		char *csvfile = malloc(100*sizeof(char));
+	{	
+		float totalNumStrings = 0;
+		int alphanumeric_lengths[3000]; /* from analyzing the csv files, magic numbers! */
+		char *csvfile = malloc(50*sizeof(char));
 
 		strcat(csvfile,"analcatdata/");
 		strcat(csvfile,analcatdata_filenames[file_idx]);
-		
     	int j;
     //                                   file, delimiter, first_line_is_header?
   	    CsvParser *csvparser = CsvParser_new(csvfile, ",", 0);
@@ -372,29 +412,17 @@ void *runner2(void *param)
         	const char **rowFields = CsvParser_getFields(row);
         	for (j = 0 ; j < CsvParser_getNumFields(row) ; j++) 
        		{
-       			for(int k = 0; j<strlen(rowFields[j][k]) - 1; ++k){
+       			for(int k = 0; k < strlen(rowFields[j]); k++){
 		   			c = rowFields[j][k];
+		   			//printf("%c", c);
 		   			if(isalpha(c) && c != NULL){
-						//printf("%s is not a pure number because of '%c'.\n", rowFields[j], c);
-						++total_alphanumeric_strings[file_idx];
-						/* If first string of file, initalize min and max */
-						if(total_alphanumeric_strings[file_idx] == 1){
-							max[file_idx] = strlen(rowFields[j]);
-							min[file_idx] = strlen(rowFields[j]);
-						}
-						else{
-							temp = strlen(rowFields[j]);
-
-							 /* TODO: Find max, min, average, variance */
-							if(temp > max[file_idx])
-								max[file_idx] = temp;
-							if(temp < min[file_idx])
-								min[file_idx] = temp;
-							break;
-						}
+		   				/* Increment the total alphanumeric strings that were found */
+		   				totalNumStrings++;
+						alphanumeric_lengths[j] = strlen(rowFields[j]);
+						break;
 					}
 					else{ /* Pure number, DO NOTHING */
-						printf("%s is a pure number\n", rowFields[j]);
+						//printf("%s is a pure number\n", rowFields[j]);
 
 					}
 				}
@@ -403,17 +431,58 @@ void *runner2(void *param)
 			//printf("\n");
         	CsvParser_destroy_row(row);
   		}
-    	CsvParser_destroy(csvparser);			
+    	CsvParser_destroy(csvparser);
+    	free(csvfile);
+    	// printf("# of fields %f\n", totalNumStrings);
+    	// /* Maximum, minimum, average, and variance */
 
-		free(csvfile);
-
+    	min[file_idx] = alphanumeric_lengths[0];
+    	max[file_idx] = alphanumeric_lengths[0];
+    	for(int i = 0; i<totalNumStrings; i++){
+    		if(min[file_idx] > alphanumeric_lengths[i]) min[file_idx] = alphanumeric_lengths[i];
+    		if(max[file_idx] < alphanumeric_lengths[i]) max[file_idx] = alphanumeric_lengths[i];
+    		avg[file_idx] += alphanumeric_lengths[0];
+    	}
+    	//printf("%.3f / %.3f\n", avg[file_idx],totalNumStrings);
+    	avg[file_idx] /= (float)totalNumStrings;
+    	
+    	/* Compute the squared deviations */
+    	for(int i = 0; i<totalNumStrings; i++){
+    		exp_sos += (alphanumeric_lengths[i] - avg[file_idx]) * (alphanumeric_lengths[i] - avg[file_idx]);
+    	}
+    	exp_sos /= (totalNumStrings - 1);
+    	variance[file_idx] = exp_sos;
 	}
 
+	char buffer[1000];
+	pthread_mutex_lock(&write_lock); 
+	fp_output = fopen(output_filepath,"ab");
+	int len = strlen("=== T2 Completed ===\n");
+	sprintf(buffer, "=== T2 Completed ===\n");
+	fputs(buffer, fp_output);
+	fclose(fp_output);	
+	buffer[0] = '\0';
+	pthread_mutex_unlock(&write_lock); 
 	printf("=== T2 Completed ===\n");
+
 	/* do the reporting */
 	pthread_mutex_lock(&lock); 
+	fp_output = fopen(output_filepath,"ab");
+	fputs("=== T2 Report Start ===\n", fp_output);
 	printf("=== T2 Report Start ===\n");
+	int i;
 
+	for (i = 0; i < NUM_FILES; i++)
+	{
+		sprintf(buffer,"\nT2 RESULT: File %s : Max = %d, Min = %d, Avg = %.3f, Var = %.3f\n", 
+					analcatdata_filenames[i], max[i], min[i], avg[i], variance[i]);
+		fputs(buffer,fp_output);
+	}
+	printf("=== T2 Report End ===\n");
+	buffer[0] = '\0';
+	sprintf(buffer, "=== T2 Report End ===\n");
+	fputs(buffer, fp_output);
+	//printf("T2 RESULT: Total elapsed time: %d seconds\n", );
 	printf("=== T2 Report End ===\n");
 	pthread_mutex_unlock(&lock);
 	pthread_exit(0);
@@ -543,8 +612,8 @@ void *runner3(void *param)
   		}
     	CsvParser_destroy(csvparser);	
 
-		printf("READING FROM %s\n",csvfile);
-		printf("Missing: %d Zero: %d Num Rows: %d Num Cols: %d\n",numMissing,numZero,rowcount,maxColumns);
+		//printf("READING FROM %s\n",csvfile);
+		//printf("Missing: %d Zero: %d Num Rows: %d Num Cols: %d\n",numMissing,numZero,rowcount,maxColumns);
 
 		pthread_mutex_lock(&lock);
     	double ratio = ((double)numMissing + (double)numZero) / ((double)maxColumns * (double)rowcount) * 100;
@@ -555,18 +624,34 @@ void *runner3(void *param)
 
 	}
 
+	char buffer[1000];
+	pthread_mutex_lock(&write_lock); 
+	fp_output = fopen(output_filepath,"ab");
+	int len = strlen("=== T3 Completed ===\n");
+	sprintf(buffer, "=== T3 Completed ===\n");
+	fputs(buffer, fp_output);
+	fclose(fp_output);	
+	buffer[0] = '\0';
+	pthread_mutex_unlock(&write_lock); 
 	printf("=== T3 Completed ===\n");
+
 	/* do the reporting */
 	pthread_mutex_lock(&lock); 
+	fp_output = fopen(output_filepath,"ab");
+	fputs("=== T3 Report Start ===\n", fp_output);
 	printf("=== T3 Report Start ===\n");
-
 	int i;
+
 	for (i = 0; i < NUM_FILES; i++)
 	{
-		printf("T3 RESULT: File %s: Ratio = %.2f\n",analcatdata_filenames[i],ratioPerFile[i]);
+		sprintf(buffer,"T3 RESULT: File %s: Ratio = %.2f\n",analcatdata_filenames[i],ratioPerFile[i]);
+		fputs(buffer,fp_output);
 	}
-
+	//printf("T1 RESULT: Total elapsed time: %d seconds\n", elapsedTime);
 	printf("=== T3 Report End ===\n");
+	buffer[0] = '\0';
+	sprintf(buffer, "=== T3 Report End ===\n");
+	fputs(buffer, fp_output);
 	pthread_mutex_unlock(&lock);
 	pthread_exit(0);
 }
