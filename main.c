@@ -39,7 +39,11 @@ typedef struct uniqueWord
 	struct uniqueWord* next;
 } uniqueWord;
 
+clock_t begin;
+
 int main(int argc, char *argv[]){
+	begin = clock();
+
 	pthread_t tid_task[NUM_THREADS];
 	pthread_attr_t attr;
 	int policy, single_thread_task, num_tasks, priority_task;
@@ -129,6 +133,10 @@ int main(int argc, char *argv[]){
 
 	   Ongoing tasks should not be blocked by reporting tasks.
 	   */	
+	clock_t end = clock();
+	double elapsed = (double)(end - begin) / CLOCKS_PER_SEC;
+	printf("RESULT: Total elapsed time: %.2f\n",elapsed);
+
 	printf("=== All Tasks Completed ===\n");
 	pthread_mutex_destroy(&lock);
 	pthread_mutex_destroy(&write_lock);
@@ -198,9 +206,7 @@ void freeList(uniqueWord* list)
 
 void *runner1(void *param)
 {
-	//int elapsedTime;
 	/* do some work ... */
-	// printf("Thread 1\n");
 
 	int uniquesPerFile[NUM_FILES] = {0};
 
@@ -364,6 +370,11 @@ void *runner1(void *param)
 		sprintf(buffer, "T1 RESULT: File %s: Total number of unique words: %d\n",analcatdata_filenames[i],uniquesPerFile[i]);
 		fputs(buffer,fp_output);
 	}
+
+	clock_t time1 = clock();
+	double elapsed = (double)(time1 - begin) / CLOCKS_PER_SEC;
+	printf("T1 RESULT: Total elapsed time: %.2f\n",elapsed);
+
 	//printf("T1 RESULT: Total elapsed time: %d seconds\n", elapsedTime);
 	printf("=== T1 Report End ===\n");
 	buffer[0] = '\0';
@@ -482,7 +493,11 @@ void *runner2(void *param)
 	buffer[0] = '\0';
 	sprintf(buffer, "=== T2 Report End ===\n");
 	fputs(buffer, fp_output);
-	//printf("T2 RESULT: Total elapsed time: %d seconds\n", );
+
+	clock_t time2 = clock();
+	double elapsed = (double)(time2 - begin) / CLOCKS_PER_SEC;
+	printf("T2 RESULT: Total elapsed time: %.2f\n",elapsed);
+
 	printf("=== T2 Report End ===\n");
 	pthread_mutex_unlock(&lock);
 	pthread_exit(0);
@@ -518,6 +533,8 @@ void *runner3(void *param)
 	// printf("Thread 3\n");
 
 	double ratioPerFile[NUM_FILES];
+	int rowsPerFile[NUM_FILES];
+	int colsPerFile[NUM_FILES];
 	
 	
 	int rowcount;
@@ -546,6 +563,7 @@ void *runner3(void *param)
    		{
    			pthread_mutex_unlock(&lock);
    			rowcount++;
+   			rowsPerFile[i]++;
    			pthread_mutex_unlock(&lock);
         	const char **rowFields = CsvParser_getFields(row);
 
@@ -553,13 +571,14 @@ void *runner3(void *param)
         	{
         		pthread_mutex_lock(&lock);
         		maxColumns = CsvParser_getNumFields(row);
+        		colsPerFile[i] = maxColumns;
         		pthread_mutex_unlock(&lock);
         	}
 
 
         	CsvParser_destroy_row(row);
   		}
-    	CsvParser_destroy(csvparser);			
+    	CsvParser_destroy(csvparser);  		   			
 
     	// Then get the number of missing or zero values. 
 
@@ -620,9 +639,46 @@ void *runner3(void *param)
     	ratioPerFile[i] = ratio;
     	pthread_mutex_unlock(&lock);
 
+
 		free(csvfile);
 
+	} 
+
+// Find the min, max, and average number of rows and columns in all of the files
+
+	int minRow = rowsPerFile[0];
+	int maxRow = rowsPerFile[0];
+	int minCol = colsPerFile[0];
+	int maxCol = colsPerFile[0];
+	int sumRows = rowsPerFile[0];
+	int sumCols = colsPerFile[0];
+/*
+	for (int i = 0;i < NUM_FILES;i++)
+	{
+		printf("File %s has %d rows\n",analcatdata_filenames[i],rowsPerFile[i]);
 	}
+	printf("MIN ROW IS %d\n",minRow); */
+
+
+	for (int i = 1;i < NUM_FILES;i++)
+	{
+		if (rowsPerFile[i] < minRow)
+			minRow = rowsPerFile[i];
+		if (rowsPerFile[i] > maxRow)
+			maxRow = rowsPerFile[i];
+		if (colsPerFile[i] < minCol)
+			minCol = colsPerFile[i];
+		if (colsPerFile[i] > maxCol)
+			maxCol = colsPerFile[i];	
+
+		sumRows += rowsPerFile[i];
+		sumCols += colsPerFile[i];	
+	}
+
+	
+
+	double avgRow = (double)sumRows / (double)NUM_FILES;
+	double avgCol = (double)sumCols / (double)NUM_FILES;
 
 	char buffer[1000];
 	pthread_mutex_lock(&write_lock); 
@@ -644,10 +700,19 @@ void *runner3(void *param)
 
 	for (i = 0; i < NUM_FILES; i++)
 	{
-		sprintf(buffer,"T3 RESULT: File %s: Ratio = %.2f\n",analcatdata_filenames[i],ratioPerFile[i]);
+		sprintf(buffer,"T3 RESULT: File %s: Ratio = %.2f%%\n",analcatdata_filenames[i],ratioPerFile[i]);
 		fputs(buffer,fp_output);
 	}
-	//printf("T1 RESULT: Total elapsed time: %d seconds\n", elapsedTime);
+
+	sprintf(buffer,"T3 RESULT: Rows: Max = %d, Min = %d, Avg = %.2f\n",maxRow,minRow,avgRow);
+	fputs(buffer,fp_output);
+	sprintf(buffer,"T3 RESULT: Cols: Max = %d, Min = %d, Avg = %.2f\n",maxCol,minCol,avgCol);
+	fputs(buffer,fp_output);
+
+	clock_t time3 = clock();
+	double elapsed = (double)(time3 - begin) / CLOCKS_PER_SEC;
+	printf("T3 RESULT: Total elapsed time: %.2f\n",elapsed);
+
 	printf("=== T3 Report End ===\n");
 	buffer[0] = '\0';
 	sprintf(buffer, "=== T3 Report End ===\n");
