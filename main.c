@@ -43,7 +43,6 @@ clock_t begin;
 
 int main(int argc, char *argv[]){
 	begin = clock();
-
 	pthread_t tid_task[NUM_THREADS];
 	pthread_attr_t attr;
 	int policy, single_thread_task, num_tasks, priority_task;
@@ -68,6 +67,10 @@ int main(int argc, char *argv[]){
 	sprintf(buffer, "== main.c report output ==\n\n");
 	fputs(buffer, fp_output);
 	fclose(fp_output);	
+
+	printf("Get scheduling policy\n");
+	if (pthread_attr_getschedpolicy(&attr, &policy) != 0)
+		fprintf(stderr, "Unable to get policy.\n");
 
 	/* Parse user input for program options*/
 	if (argc < 2){
@@ -121,11 +124,9 @@ int main(int argc, char *argv[]){
 		printf("***ERROR: Please select a mode for running (single or multi threaded).\n");
 		exit(1);
 	}
-	printf("Get scheduling policy\n");
-	if (pthread_attr_getschedpolicy(&attr, &policy) != 0)
-		fprintf(stderr, "Unable to get policy.\n");
 	
 	printf("Current mode: %d\n", (int)mode);
+
 	/* How many threads should run? */
 	if(mode == SINGLE_THREAD){
 		pthread_create(&tid_task[0],&attr,f[single_thread_task - 1], NULL);
@@ -133,9 +134,16 @@ int main(int argc, char *argv[]){
 	}
 	else if(mode == MULTI_THREAD){
 		printf("Running in multi-threaded mode\n");
-		if(policy == SCHED_RR || policy == SCHED_FIFO){
+		if((policy == SCHED_RR) || (policy == SCHED_FIFO)){
+			printf("Changing scheduling policy to: ");
 			if (pthread_attr_setschedpolicy(&attr, policy) != 0)
 				fprintf(stderr, "Unable to set policy.\n");
+			if (policy == SCHED_OTHER)
+				printf("SCHED_OTHER\n");
+			else if (policy == SCHED_RR)
+				printf("SCHED_RR\n");
+			else if (policy == SCHED_FIFO)
+				printf("SCHED_FIFO\n");
 		}
 		else if(priority == LOW){
 			printf("Priority set to: LOW\n");
