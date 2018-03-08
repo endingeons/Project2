@@ -1,672 +1,216 @@
-=== T1 Completed ===
-=== T1 Report Start ===
-T1 RESULT: File lawsuit.csv: Total number of unique words: 5
-T1 RESULT: File famufsu.csv: Total number of unique words: 6
-T1 RESULT: File authorship.csv: Total number of unique words: 75
-T1 RESULT: File vineyard.csv: Total number of unique words: 4
-T1 RESULT: File election2000.csv: Total number of unique words: 72
-T1 RESULT: File bankruptcy.csv: Total number of unique words: 73
-T1 RESULT: File marketing.csv: Total number of unique words: 0
-T1 RESULT: File currency.csv: Total number of unique words: 52
-T1 RESULT: File apnea2.csv: Total number of unique words: 9
-T1 RESULT: File uklottery.csv: Total number of unique words: 3
-T1 RESULT: File neavote.csv: Total number of unique words: 106
-T1 RESULT: File supreme.csv: Total number of unique words: 15
-T1 RESULT: File boxing2.csv: Total number of unique words: 31
-T1 RESULT: File asbestos.csv: Total number of unique words: 16
-T1 RESULT: File germangss.csv: Total number of unique words: 23
-T1 RESULT: File galapagos.csv: Total number of unique words: 35
-T1 RESULT: File braziltourism.csv: Total number of unique words: 12
-T1 RESULT: File cyyoung9302.csv: Total number of unique words: 92
-T1 RESULT: File cyyoung8092.csv: Total number of unique words: 95
-T1 RESULT: File titanic.csv: Total number of unique words: 17
-T1 RESULT: File esr.csv: Total number of unique words: 4
-T1 RESULT: File lda.csv: Total number of unique words: 10
-T1 RESULT: File kotzehawk.csv: Total number of unique words: 0
-T1 RESULT: File negotiation.csv: Total number of unique words: 11
-T1 RESULT: File lalottery.csv: Total number of unique words: 4
-T1 RESULT: File winterolympic.csv: Total number of unique words: 35
-T1 RESULT: File fraud.csv: Total number of unique words: 2
-T1 RESULT: File seropositive.csv: Total number of unique words: 7
-T1 RESULT: File menarche.csv: Total number of unique words: 3
-T1 RESULT: File draft.csv: Total number of unique words: 3
-T1 RESULT: File chlamydia.csv: Total number of unique words: 13
-T1 RESULT: File bondrate.csv: Total number of unique words: 95
-T1 RESULT: File gsssexsurvey.csv: Total number of unique words: 17
-T1 RESULT: File dmft.csv: Total number of unique words: 20
-T1 RESULT: File wildcat.csv: Total number of unique words: 8
-T1 RESULT: File cancerrate.csv: Total number of unique words: 12
-T1 RESULT: File hurricanes.csv: Total number of unique words: 2
-T1 RESULT: File assessment.csv: Total number of unique words: 9
-T1 RESULT: File michiganacc.csv: Total number of unique words: 23
-T1 RESULT: File hivcd4cd8.csv: Total number of unique words: 4
-T1 RESULT: File hiroshima.csv: Total number of unique words: 4
-T1 RESULT: File apnea1.csv: Total number of unique words: 8
-T1 RESULT: File whale.csv: Total number of unique words: 6
-T1 RESULT: File birthday.csv: Total number of unique words: 12
-T1 RESULT: File hivtrans2.csv: Total number of unique words: 8
-T1 RESULT: File creditscore.csv: Total number of unique words: 7
-T1 RESULT: File uktrainacc.csv: Total number of unique words: 15
-T1 RESULT: File boxing1.csv: Total number of unique words: 23
-T1 RESULT: File tornado.csv: Total number of unique words: 19
-T1 RESULT: File hivtrans1.csv: Total number of unique words: 7
-T1 RESULT: File chall2.csv: Total number of unique words: 5
-T1 RESULT: File vehicle.csv: Total number of unique words: 11
-T1 RESULT: File enrollment.csv: Total number of unique words: 4
-T1 RESULT: File mapleleafs.csv: Total number of unique words: 7
-T1 RESULT: File japansolvent.csv: Total number of unique words: 108
-T1 RESULT: File mines.csv: Total number of unique words: 4
-T1 RESULT: File shampoo.csv: Total number of unique words: 4
-T1 RESULT: File impeach.csv: Total number of unique words: 168
-T1 RESULT: File donner.csv: Total number of unique words: 8
-T1 RESULT: File happiness.csv: Total number of unique words: 13
-T1 RESULT: File runshoes.csv: Total number of unique words: 14
-T1 RESULT: File chall101.csv: Total number of unique words: 3
-T1 RESULT: File ncaa.csv: Total number of unique words: 5
-T1 RESULT: File olympic2000.csv: Total number of unique words: 83
-T1 RESULT: File sexpartners.csv: Total number of unique words: 2
-T1 RESULT: File soccer.csv: Total number of unique words: 12
-T1 RESULT: File randomgen.csv: Total number of unique words: 7
-T1 RESULT: File gmat.csv: Total number of unique words: 8
-T1 RESULT: File homerun.csv: Total number of unique words: 36
-T1 RESULT: File reviewer.csv: Total number of unique words: 678
-T1 RESULT: File broadway.csv: Total number of unique words: 206
-T1 RESULT: File votesurvey.csv: Total number of unique words: 16
-T1 RESULT: File challenger.csv: Total number of unique words: 7
-T1 RESULT: File ossification.csv: Total number of unique words: 7
-T1 RESULT: File floridashark.csv: Total number of unique words: 4
-T1 RESULT: File devils.csv: Total number of unique words: 2
-T1 RESULT: File broadwaymult.csv: Total number of unique words: 200
-T1 RESULT: File halloffame.csv: Total number of unique words: 1548
-T1 RESULT: File apnea3.csv: Total number of unique words: 9
-T1 RESULT: File AIDS.csv: Total number of unique words: 20
-T1 RESULT: File gviolence.csv: Total number of unique words: 167
-T1 RESULT: File beetles.csv: Total number of unique words: 4
-T1 RESULT: File benford.csv: Total number of unique words: 7
-T1 RESULT: File anscombe.csv: Total number of unique words: 0
-=== T1 Completed ===
-=== T1 Report Start ===
-T1 RESULT: File lawsuit.csv: Total number of unique words: 5
-T1 RESULT: File famufsu.csv: Total number of unique words: 6
-T1 RESULT: File authorship.csv: Total number of unique words: 75
-T1 RESULT: File vineyard.csv: Total number of unique words: 4
-T1 RESULT: File election2000.csv: Total number of unique words: 72
-T1 RESULT: File bankruptcy.csv: Total number of unique words: 73
-T1 RESULT: File marketing.csv: Total number of unique words: 0
-T1 RESULT: File currency.csv: Total number of unique words: 52
-T1 RESULT: File apnea2.csv: Total number of unique words: 9
-T1 RESULT: File uklottery.csv: Total number of unique words: 3
-T1 RESULT: File neavote.csv: Total number of unique words: 106
-T1 RESULT: File supreme.csv: Total number of unique words: 15
-T1 RESULT: File boxing2.csv: Total number of unique words: 31
-T1 RESULT: File asbestos.csv: Total number of unique words: 16
-T1 RESULT: File germangss.csv: Total number of unique words: 23
-T1 RESULT: File galapagos.csv: Total number of unique words: 35
-T1 RESULT: File braziltourism.csv: Total number of unique words: 12
-T1 RESULT: File cyyoung9302.csv: Total number of unique words: 92
-T1 RESULT: File cyyoung8092.csv: Total number of unique words: 95
-T1 RESULT: File titanic.csv: Total number of unique words: 17
-T1 RESULT: File esr.csv: Total number of unique words: 4
-T1 RESULT: File lda.csv: Total number of unique words: 10
-T1 RESULT: File kotzehawk.csv: Total number of unique words: 0
-T1 RESULT: File negotiation.csv: Total number of unique words: 11
-T1 RESULT: File lalottery.csv: Total number of unique words: 4
-T1 RESULT: File winterolympic.csv: Total number of unique words: 35
-T1 RESULT: File fraud.csv: Total number of unique words: 2
-T1 RESULT: File seropositive.csv: Total number of unique words: 7
-T1 RESULT: File menarche.csv: Total number of unique words: 3
-T1 RESULT: File draft.csv: Total number of unique words: 3
-T1 RESULT: File chlamydia.csv: Total number of unique words: 13
-T1 RESULT: File bondrate.csv: Total number of unique words: 95
-T1 RESULT: File gsssexsurvey.csv: Total number of unique words: 17
-T1 RESULT: File dmft.csv: Total number of unique words: 20
-T1 RESULT: File wildcat.csv: Total number of unique words: 8
-T1 RESULT: File cancerrate.csv: Total number of unique words: 12
-T1 RESULT: File hurricanes.csv: Total number of unique words: 2
-T1 RESULT: File assessment.csv: Total number of unique words: 9
-T1 RESULT: File michiganacc.csv: Total number of unique words: 23
-T1 RESULT: File hivcd4cd8.csv: Total number of unique words: 4
-T1 RESULT: File hiroshima.csv: Total number of unique words: 4
-T1 RESULT: File apnea1.csv: Total number of unique words: 8
-T1 RESULT: File whale.csv: Total number of unique words: 6
-T1 RESULT: File birthday.csv: Total number of unique words: 12
-T1 RESULT: File hivtrans2.csv: Total number of unique words: 8
-T1 RESULT: File creditscore.csv: Total number of unique words: 7
-T1 RESULT: File uktrainacc.csv: Total number of unique words: 15
-T1 RESULT: File boxing1.csv: Total number of unique words: 23
-T1 RESULT: File tornado.csv: Total number of unique words: 19
-T1 RESULT: File hivtrans1.csv: Total number of unique words: 7
-T1 RESULT: File chall2.csv: Total number of unique words: 5
-T1 RESULT: File vehicle.csv: Total number of unique words: 11
-T1 RESULT: File enrollment.csv: Total number of unique words: 4
-T1 RESULT: File mapleleafs.csv: Total number of unique words: 7
-T1 RESULT: File japansolvent.csv: Total number of unique words: 108
-T1 RESULT: File mines.csv: Total number of unique words: 4
-T1 RESULT: File shampoo.csv: Total number of unique words: 4
-T1 RESULT: File impeach.csv: Total number of unique words: 168
-T1 RESULT: File donner.csv: Total number of unique words: 8
-T1 RESULT: File happiness.csv: Total number of unique words: 13
-T1 RESULT: File runshoes.csv: Total number of unique words: 14
-T1 RESULT: File chall101.csv: Total number of unique words: 3
-T1 RESULT: File ncaa.csv: Total number of unique words: 5
-T1 RESULT: File olympic2000.csv: Total number of unique words: 83
-T1 RESULT: File sexpartners.csv: Total number of unique words: 2
-T1 RESULT: File soccer.csv: Total number of unique words: 12
-T1 RESULT: File randomgen.csv: Total number of unique words: 7
-T1 RESULT: File gmat.csv: Total number of unique words: 8
-T1 RESULT: File homerun.csv: Total number of unique words: 36
-T1 RESULT: File reviewer.csv: Total number of unique words: 678
-T1 RESULT: File broadway.csv: Total number of unique words: 206
-T1 RESULT: File votesurvey.csv: Total number of unique words: 16
-T1 RESULT: File challenger.csv: Total number of unique words: 7
-T1 RESULT: File ossification.csv: Total number of unique words: 7
-T1 RESULT: File floridashark.csv: Total number of unique words: 4
-T1 RESULT: File devils.csv: Total number of unique words: 2
-T1 RESULT: File broadwaymult.csv: Total number of unique words: 200
-T1 RESULT: File halloffame.csv: Total number of unique words: 1548
-T1 RESULT: File apnea3.csv: Total number of unique words: 9
-T1 RESULT: File AIDS.csv: Total number of unique words: 20
-T1 RESULT: File gviolence.csv: Total number of unique words: 167
-T1 RESULT: File beetles.csv: Total number of unique words: 4
-T1 RESULT: File benford.csv: Total number of unique words: 7
-T1 RESULT: File anscombe.csv: Total number of unique words: 0
-=== T1 Report End ===
+== main.c report output ==
+
 === T2 Completed ===
 === T2 Report Start ===
-
 T2 RESULT: File lawsuit.csv : Max = 17, Min = 3, Avg = 17.000, Var = 93.500
-
 T2 RESULT: File famufsu.csv : Max = 9, Min = 0, Avg = 6.000, Var = 34.794
-
 T2 RESULT: File authorship.csv : Max = 11, Min = 0, Avg = 1.000, Var = 1.576
-
 T2 RESULT: File vineyard.csv : Max = 5, Min = 3, Avg = 4.000, Var = 1.192
-
 T2 RESULT: File election2000.csv : Max = 12, Min = 0, Avg = 10.000, Var = 44.490
-
-T2 RESULT: File bankruptcy.csv : Max = 16, Min = 2, Avg = 16.000, Var = 139.437
-
-T2 RESULT: File marketing.csv : Max = 3, Min = 2, Avg = 3.000, Var = 4.420
-
-T2 RESULT: File currency.csv : Max = 18, Min = 0, Avg = 9.000, Var = 45.838
-
+T2 RESULT: File bankruptcy.csv : Max = 16, Min = 0, Avg = 16.000, Var = 196.755
+T2 RESULT: File marketing.csv : Max = 3, Min = 2, Avg = 3.000, Var = 6.211
+T2 RESULT: File currency.csv : Max = 18, Min = 0, Avg = 9.000, Var = 45.856
 T2 RESULT: File apnea2.csv : Max = 11, Min = 0, Avg = 2.000, Var = 4.062
-
 T2 RESULT: File uklottery.csv : Max = 12, Min = 6, Avg = 6.000, Var = 40.062
-
 T2 RESULT: File neavote.csv : Max = 11, Min = 0, Avg = 4.000, Var = 11.537
-
 T2 RESULT: File supreme.csv : Max = 24, Min = 7, Avg = 13.000, Var = 36.077
-
 T2 RESULT: File boxing2.csv : Max = 24, Min = 0, Avg = 12.000, Var = 131.431
-
 T2 RESULT: File asbestos.csv : Max = 24, Min = 0, Avg = 4.000, Var = 16.430
-
-T2 RESULT: File germangss.csv : Max = 24, Min = 0, Avg = 9.000, Var = 78.267
-
-T2 RESULT: File galapagos.csv : Max = 27, Min = 2, Avg = 4.000, Var = 44.386
-
-T2 RESULT: File braziltourism.csv : Max = 13, Min = 3, Avg = 3.000, Var = 38.798
-
+T2 RESULT: File germangss.csv : Max = 24, Min = 0, Avg = 9.000, Var = 78.827
+T2 RESULT: File galapagos.csv : Max = 27, Min = 2, Avg = 4.000, Var = 44.401
+T2 RESULT: File braziltourism.csv : Max = 13, Min = 3, Avg = 3.000, Var = 38.800
 T2 RESULT: File cyyoung9302.csv : Max = 15, Min = 0, Avg = 4.000, Var = 13.450
-
 T2 RESULT: File cyyoung8092.csv : Max = 15, Min = 0, Avg = 4.000, Var = 13.603
-
 T2 RESULT: File titanic.csv : Max = 15, Min = 2, Avg = 11.000, Var = 56.991
-
 T2 RESULT: File esr.csv : Max = 14, Min = 3, Avg = 10.000, Var = 60.996
-
 T2 RESULT: File lda.csv : Max = 15, Min = 1, Avg = 1.000, Var = 52.722
-
 T2 RESULT: File kotzehawk.csv : Max = 1, Min = 1, Avg = -nan, Var = -52.722
-
 T2 RESULT: File negotiation.csv : Max = 20, Min = 0, Avg = 9.000, Var = 45.755
-
 T2 RESULT: File lalottery.csv : Max = 15, Min = 5, Avg = 5.000, Var = 145.755
-
 T2 RESULT: File winterolympic.csv : Max = 15, Min = 2, Avg = 4.000, Var = 16.910
-
 T2 RESULT: File fraud.csv : Max = 5, Min = 3, Avg = 3.000, Var = 2.537
-
 T2 RESULT: File seropositive.csv : Max = 11, Min = 0, Avg = 3.000, Var = 5.982
-
 T2 RESULT: File menarche.csv : Max = 12, Min = 3, Avg = 3.000, Var = 45.491
-
 T2 RESULT: File draft.csv : Max = 24, Min = 2, Avg = 11.000, Var = 100.082
-
-T2 RESULT: File chlamydia.csv : Max = 24, Min = 0, Avg = 3.000, Var = 12.202
-
-T2 RESULT: File bondrate.csv : Max = 21, Min = 0, Avg = 9.000, Var = 68.310
-
-T2 RESULT: File gsssexsurvey.csv : Max = 18, Min = 3, Avg = 7.000, Var = 41.146
-
+T2 RESULT: File chlamydia.csv : Max = 24, Min = 0, Avg = 5.000, Var = 23.069
+T2 RESULT: File bondrate.csv : Max = 21, Min = 0, Avg = 9.000, Var = 68.356
+T2 RESULT: File gsssexsurvey.csv : Max = 18, Min = 3, Avg = 7.000, Var = 41.151
 T2 RESULT: File dmft.csv : Max = 18, Min = 0, Avg = 10.000, Var = 98.284
-
 T2 RESULT: File wildcat.csv : Max = 15, Min = 5, Avg = 10.000, Var = 34.857
-
 T2 RESULT: File cancerrate.csv : Max = 18, Min = 2, Avg = 7.000, Var = 23.466
-
 T2 RESULT: File hurricanes.csv : Max = 5, Min = 4, Avg = 4.000, Var = 24.466
-
 T2 RESULT: File assessment.csv : Max = 26, Min = 14, Avg = 21.000, Var = 16.031
-
 T2 RESULT: File michiganacc.csv : Max = 25, Min = 0, Avg = 10.000, Var = 84.446
-
 T2 RESULT: File hivcd4cd8.csv : Max = 13, Min = 5, Avg = 8.000, Var = 23.689
-
 T2 RESULT: File hiroshima.csv : Max = 14, Min = 4, Avg = 4.000, Var = 86.345
-
 T2 RESULT: File apnea1.csv : Max = 23, Min = 0, Avg = 2.000, Var = 7.279
-
 T2 RESULT: File whale.csv : Max = 14, Min = 11, Avg = 13.000, Var = 2.183
-
 T2 RESULT: File birthday.csv : Max = 22, Min = 0, Avg = 5.000, Var = 25.544
-
-T2 RESULT: File hivtrans2.csv : Max = 13, Min = 5, Avg = 10.000, Var = 19.886
-
-T2 RESULT: File creditscore.csv : Max = 23, Min = 3, Avg = 3.000, Var = 224.648
-
-T2 RESULT: File uktrainacc.csv : Max = 20, Min = 4, Avg = 4.000, Var = 116.478
-
+T2 RESULT: File hivtrans2.csv : Max = 13, Min = 5, Avg = 11.000, Var = 15.924
+T2 RESULT: File creditscore.csv : Max = 23, Min = 3, Avg = 3.000, Var = 223.987
+T2 RESULT: File uktrainacc.csv : Max = 20, Min = 4, Avg = 4.000, Var = 116.437
 T2 RESULT: File boxing1.csv : Max = 20, Min = 0, Avg = 20.000, Var = 367.169
-
 T2 RESULT: File tornado.csv : Max = 20, Min = 2, Avg = 4.000, Var = 35.355
-
 T2 RESULT: File hivtrans1.csv : Max = 13, Min = 3, Avg = 3.000, Var = 57.339
-
 T2 RESULT: File chall2.csv : Max = 11, Min = 4, Avg = 4.000, Var = 35.085
-
-T2 RESULT: File vehicle.csv : Max = 20, Min = 0, Avg = 3.000, Var = 17.284
-
-T2 RESULT: File enrollment.csv : Max = 11, Min = 5, Avg = 6.000, Var = 21.642
-
-T2 RESULT: File mapleleafs.csv : Max = 20, Min = 0, Avg = 4.000, Var = 17.116
-
-T2 RESULT: File japansolvent.csv : Max = 20, Min = 2, Avg = 15.000, Var = 112.707
-
-T2 RESULT: File mines.csv : Max = 23, Min = 4, Avg = 23.000, Var = 331.236
-
-T2 RESULT: File shampoo.csv : Max = 19, Min = 14, Avg = 14.000, Var = 356.236
-
-T2 RESULT: File impeach.csv : Max = 20, Min = 0, Avg = 6.000, Var = 34.748
-
-T2 RESULT: File donner.csv : Max = 20, Min = 2, Avg = 2.000, Var = 31.521
-
-T2 RESULT: File happiness.csv : Max = 20, Min = 2, Avg = 18.000, Var = 178.167
-
-T2 RESULT: File runshoes.csv : Max = 20, Min = 2, Avg = 4.000, Var = 18.931
-
-T2 RESULT: File chall101.csv : Max = 11, Min = 7, Avg = 11.000, Var = 21.965
-
-T2 RESULT: File ncaa.csv : Max = 13, Min = 2, Avg = 11.000, Var = 63.314
-
-T2 RESULT: File olympic2000.csv : Max = 14, Min = 0, Avg = 5.000, Var = 9.927
-
-T2 RESULT: File sexpartners.csv : Max = 6, Min = 4, Avg = 4.000, Var = 13.927
-
-T2 RESULT: File soccer.csv : Max = 20, Min = 8, Avg = 9.000, Var = 37.655
-
-T2 RESULT: File randomgen.csv : Max = 17, Min = 2, Avg = 8.000, Var = 24.539
-
-T2 RESULT: File gmat.csv : Max = 19, Min = 3, Avg = 19.000, Var = 168.635
-
-T2 RESULT: File homerun.csv : Max = 14, Min = 0, Avg = 4.000, Var = 15.955
-
-T2 RESULT: File reviewer.csv : Max = 14, Min = 0, Avg = 9.000, Var = 79.016
-
-T2 RESULT: File broadway.csv : Max = 31, Min = 0, Avg = 31.000, Var = 903.966
-
-T2 RESULT: File votesurvey.csv : Max = 19, Min = 0, Avg = 4.000, Var = 28.450
-
-T2 RESULT: File challenger.csv : Max = 12, Min = 4, Avg = 4.000, Var = 35.090
-
-T2 RESULT: File ossification.csv : Max = 17, Min = 0, Avg = 8.000, Var = 25.230
-
-T2 RESULT: File floridashark.csv : Max = 10, Min = 4, Avg = 4.000, Var = 35.410
-
-T2 RESULT: File devils.csv : Max = 13, Min = 5, Avg = 5.000, Var = 99.410
-
-T2 RESULT: File broadwaymult.csv : Max = 31, Min = 0, Avg = 31.000, Var = 942.404
-
-T2 RESULT: File halloffame.csv : Max = 15, Min = 0, Avg = 11.000, Var = 119.244
-
-T2 RESULT: File apnea3.csv : Max = 15, Min = 0, Avg = 2.000, Var = 5.459
-
-T2 RESULT: File AIDS.csv : Max = 31, Min = 0, Avg = 6.000, Var = 25.644
-
-T2 RESULT: File gviolence.csv : Max = 23, Min = 0, Avg = 14.000, Var = 97.658
-
-T2 RESULT: File beetles.csv : Max = 8, Min = 5, Avg = 8.000, Var = 55.329
-
-T2 RESULT: File benford.csv : Max = 19, Min = 5, Avg = 5.000, Var = 101.722
-
-T2 RESULT: File anscombe.csv : Max = 2, Min = 2, Avg = 2.000, Var = 14.532
-=== T2 Report End ===
-=== T3 Completed ===
+T2 RESULT: File vehicle.csv : Max = 20, Min = 0, Avg = 3.000, Var = 15.276
+T2 RESULT: File enrollment.csv : Max = 11, Min = 5, Avg = 6.000, Var = 20.638
+T2 RESULT: === T1 Completed ===
+=== T1 Report Start ===
+T1 RESULT: File lawsuit.csv: Total number of unique words: 5
+T1 RESULT: File famufsu.csv: Total number of unique words: 6
+T1 RESULT: File authorship.csv: Total number of unique words: 75
+T1 RESULT: File vineyard.csv: Total number of unique words: 4
+T1 RESULT: File election2000.csv: Total number of unique words: 72
+T1 RESULT: File bankruptcy.csv: Total number of unique words: 73
+T1 RESULT: File marketing.csv: Total number of unique words: 0
+T1 RESULT: File currency.csv: Total number of unique words: 52
+T1 RESULT: File apnea2.csv: Total number of unique words: 9
+T1 RESULT: File uklottery.csv: Total number of unique words: 3
+T1 RESULT: File neavote.csv: Total number of unique words: 106
+T1 RESULT: File supreme.csv: Total number of unique words: 15
+T1 RESULT: File boxing2.csv: Total number of unique words: 31
+T1 RESULT: File asbestos.csv: Total number of unique words: 16
+T1 RESULT: File germangss.csv: Total number of unique words: 23
+T1 RESULT: File galapagos.csv: Total number of unique words: 35
+T1 RESULT: File braziltourism.csv: Total number of unique words: 12
+T1 RESULT: File cyyoung9302.csv: Total number of unique words: 92
+T1 RESULT: File cyyoung8092.csv: Total number of unique words: 95
+T1 RESULT: File titanic.csv: Total number of unique words: 17
+T1 RESULT: File esr.csv: Total number of unique words: 4
+T1 RESULT: File lda.csv: Total number of unique words: 10
+T1 RESULT: File kotzehawk.csv: Total number of unique words: 0
+T1 RESULT: File negotiation.csv: Total number of unique words: 11
+T1 RESULT: File lalottery.csv: Total number of unique words: 4
+T1 RESULT: File winterolympic.csv: Total number of unique words: 35
+T1 RESULT: File fraud.csv: Total number of unique words: 2
+T1 RESULT: File seropositive.csv: Total number of unique words: 7
+T1 RESULT: File menarche.csv: Total number of unique words: 3
+T1 RESULT: File draft.csv: Total number of unique words: 3
+T1 RESULT: File chlamydia.csv: Total number of unique words: 13
+T1 RESULT: File bondrate.csv: Total number of unique words: 95
+T1 RESULT: File gsssexsurvey.csv: Total number of unique words: 17
+T1 RESULT: File dmft.csv: Total number of unique words: 20
+T1 RESULT: File wildcat.csv: Total number of unique words: 8
+T1 RESULT: File cancerrate.csv: Total number of unique words: 12
+T1 RESULT: File hurricanes.csv: Total number of unique words: 2
+T1 RESULT: File assessment.csv: Total number of unique words: 9
+T1 RESULT: File michiganacc.csv: Total number of unique words: 23
+T1 RESULT: File hivcd4cd8.csv: Total number of unique words: 4
+T1 RESULT: File hiroshima.csv: Total number of unique words: 4
+T1 RESULT: File apnea1.csv: Total number of unique words: 8
+T1 RESULT: File whale.csv: Total number of unique words: 6
+T1 RESULT: File birthday.csv: Total number of unique words: 12
+T1 RESULT: File hivtrans2.csv: Total number of unique words: 8
+T1 RESULT: File creditscore.csv: Total number of unique words: 7
+T1 RESULT: File uktrainacc.csv: Total number of unique words: 15
+T1 RESULT: File boxing1.csv: Total number of unique words: 23
+T1 RESULT: File tornado.csv: Total number of unique words: 19
+T1 RESULT: File hivtrans1.csv: Total number of unique words: 7
+T1 RESULT: File chall2.csv: Total number of unique words: 5
+T1 RESULT: File vehicle.csv: Total number of unique words: 11
+T1 RESULT: File enrollment.csv: Total number of unique words: 4
+T1 RESULT: File mapleleafs.csv: Total number of unique words: 7
+T1 RESULT: File japansolvent.csv: Total number of unique words: 108
+T1 RESULT: File mines.csv: Total number of unique words: 4
+T1 RESULT: File shampoo.csv: Total number of unique words: 4
+T1 RESULT: File impeach.csv: Total number of unique words: 168
+T1 RESULT: File donner.csv: Total number of unique words: 8
+T1 RESULT: File happiness.csv: Total number of unique words: 13
+T1 RESULT: File runshoes.csv: Total number of unique words: 14
+T1 RESULT: File chall101.csv: Total number of unique words: 3
+T1 RESULT: File ncaa.csv: Total number of unique words: 5
+T1 RESULT: File olympic2000.csv: Total number of unique words: 83
+T1 RESULT: File sexpartners.csv: Total number === T3 Completed ===
 === T3 Report Start ===
-T3 RESULT: File lawsuit.csv: Ratio = 31.09
-T3 RESULT: File famufsu.csv: Ratio = 0.00
-T3 RESULT: File authorship.csv: Ratio = 10.87
-T3 RESULT: File vineyard.csv: Ratio = 0.16
-T3 RESULT: File election2000.csv: Ratio = 3.40
-T3 RESULT: File bankruptcy.csv: Ratio = 7.84
-T3 RESULT: File marketing.csv: Ratio = 0.84
-T3 RESULT: File currency.csv: Ratio = 3.12
-T3 RESULT: File apnea2.csv: Ratio = 13.08
-T3 RESULT: File uklottery.csv: Ratio = 0.00
-T3 RESULT: File neavote.csv: Ratio = 0.00
-T3 RESULT: File supreme.csv: Ratio = 60.08
-T3 RESULT: File boxing2.csv: Ratio = 0.00
-T3 RESULT: File asbestos.csv: Ratio = 0.00
-T3 RESULT: File germangss.csv: Ratio = 3.95
-T3 RESULT: File galapagos.csv: Ratio = 2.82
-T3 RESULT: File braziltourism.csv: Ratio = 36.40
-T3 RESULT: File cyyoung9302.csv: Ratio = 12.32
-T3 RESULT: File cyyoung8092.csv: Ratio = 6.96
-T3 RESULT: File titanic.csv: Ratio = 0.00
-T3 RESULT: File esr.csv: Ratio = 26.26
-T3 RESULT: File lda.csv: Ratio = 0.00
-T3 RESULT: File kotzehawk.csv: Ratio = 0.00
-T3 RESULT: File negotiation.csv: Ratio = 4.66
-T3 RESULT: File lalottery.csv: Ratio = 4.55
-T3 RESULT: File winterolympic.csv: Ratio = 2.35
-T3 RESULT: File fraud.csv: Ratio = 65.70
-T3 RESULT: File seropositive.csv: Ratio = 0.00
-T3 RESULT: File menarche.csv: Ratio = 3.85
-T3 RESULT: File draft.csv: Ratio = 0.05
-T3 RESULT: File chlamydia.csv: Ratio = 0.98
-T3 RESULT: File bondrate.csv: Ratio = 8.48
-T3 RESULT: File gsssexsurvey.csv: Ratio = 37.31
-T3 RESULT: File dmft.csv: Ratio = 10.10
-T3 RESULT: File wildcat.csv: Ratio = 27.85
-T3 RESULT: File cancerrate.csv: Ratio = 2.78
-T3 RESULT: File hurricanes.csv: Ratio = 4.31
-T3 RESULT: File assessment.csv: Ratio = 2.08
-T3 RESULT: File michiganacc.csv: Ratio = 0.00
-T3 RESULT: File hivcd4cd8.csv: Ratio = 42.59
-T3 RESULT: File hiroshima.csv: Ratio = 23.13
-T3 RESULT: File apnea1.csv: Ratio = 14.29
-T3 RESULT: File whale.csv: Ratio = 14.25
-T3 RESULT: File birthday.csv: Ratio = 2.05
-T3 RESULT: File hivtrans2.csv: Ratio = 0.00
-T3 RESULT: File creditscore.csv: Ratio = 41.87
-T3 RESULT: File uktrainacc.csv: Ratio = 45.59
-T3 RESULT: File boxing1.csv: Ratio = 0.00
-T3 RESULT: File tornado.csv: Ratio = 10.50
-T3 RESULT: File hivtrans1.csv: Ratio = 0.00
-T3 RESULT: File chall2.csv: Ratio = 9.17
-T3 RESULT: File vehicle.csv: Ratio = 0.00
-T3 RESULT: File enrollment.csv: Ratio = 0.00
-T3 RESULT: File mapleleafs.csv: Ratio = 0.00
-T3 RESULT: File japansolvent.csv: Ratio = 4.72
-T3 RESULT: File mines.csv: Ratio = 39.16
-T3 RESULT: File shampoo.csv: Ratio = 6.25
-T3 RESULT: File impeach.csv: Ratio = 5.22
-T3 RESULT: File donner.csv: Ratio = 6.03
-T3 RESULT: File happiness.csv: Ratio = 0.41
-T3 RESULT: File runshoes.csv: Ratio = 28.02
-T3 RESULT: File chall101.csv: Ratio = 30.94
-T3 RESULT: File ncaa.csv: Ratio = 75.87
-T3 RESULT: File olympic2000.csv: Ratio = 5.74
-T3 RESULT: File sexpartners.csv: Ratio = 13.94
-T3 RESULT: File soccer.csv: Ratio = 18.18
-T3 RESULT: File randomgen.csv: Ratio = 3.25
-T3 RESULT: File gmat.csv: Ratio = 9.74
-T3 RESULT: File homerun.csv: Ratio = 28.22
-T3 RESULT: File reviewer.csv: Ratio = 41.46
-T3 RESULT: File broadway.csv: Ratio = 12.08
-T3 RESULT: File votesurvey.csv: Ratio = 0.00
-T3 RESULT: File challenger.csv: Ratio = 20.14
-T3 RESULT: File ossification.csv: Ratio = 6.50
-T3 RESULT: File floridashark.csv: Ratio = 24.09
-T3 RESULT: File devils.csv: Ratio = 5.42
-T3 RESULT: File broadwaymult.csv: Ratio = 6.34
-T3 RESULT: File halloffame.csv: Ratio = 5.16
-T3 RESULT: File apnea3.csv: Ratio = 13.14
-T3 RESULT: File AIDS.csv: Ratio = 0.00
-T3 RESULT: File gviolence.csv: Ratio = 32.40
-T3 RESULT: File beetles.csv: Ratio = 0.00
-T3 RESULT: File benford.csv: Ratio = 0.00
-T3 RESULT: File anscombe.csv: Ratio = 0.00
+T3 RESULT: File lawsuit.csv: Ratio = 31.09%
+T3 RESULT: File famufsu.csv: Ratio = 0.00%
+T3 RESULT: File authorship.csv: Ratio = 10.87%
+T3 RESULT: File vineyard.csv: Ratio = 0.16%
+T3 RESULT: File election2000.csv: Ratio = 3.40%
+T3 RESULT: File bankruptcy.csv: Ratio = 7.84%
+T3 RESULT: File marketing.csv: Ratio = 0.84%
+T3 RESULT: File currency.csv: Ratio = 3.12%
+T3 RESULT: File apnea2.csv: Ratio = 13.08%
+T3 RESULT: File uklottery.csv: Ratio = 0.00%
+T3 RESULT: File neavote.csv: Ratio = 0.00%
+T3 RESULT: File supreme.csv: Ratio = 60.08%
+T3 RESULT: File boxing2.csv: Ratio = 0.00%
+T3 RESULT: File asbestos.csv: Ratio = 0.00%
+T3 RESULT: File germangss.csv: Ratio = 3.95%
+T3 RESULT: File galapagos.csv: Ratio = 2.82%
+T3 RESULT: File braziltourism.csv: Ratio = 36.40%
+T3 RESULT: File cyyoung9302.csv: Ratio = 12.32%
+T3 RESULT: File cyyoung8092.csv: Ratio = 6.96%
+T3 RESULT: File titanic.csv: Ratio = 0.00%
+T3 RESULT: File esr.csv: Ratio = 26.26%
+T3 RESULT: File lda.csv: Ratio = 0.00%
+T3 RESULT: File kotzehawk.csv: Ratio = 0.00%
+T3 RESULT: File negotiation.csv: Ratio = 4.66%
+T3 RESULT: File lalottery.csv: Ratio = 4.55%
+T3 RESULT: File winterolympic.csv: Ratio = 2.35%
+T3 RESULT: File fraud.csv: Ratio = 65.70%
+T3 RESULT: File seropositive.csv: Ratio = 0.00%
+T3 RESULT: File menarche.csv: Ratio = 3.85%
+T3 RESULT: File draft.csv: Ratio = 0.05%
+T3 RESULT: File chlamydia.csv: Ratio = 0.98%
+T3 RESULT: File bondrate.csv: Ratio = 8.48%
+T3 RESULT: File gsssexsurvey.csv: Ratio = 37.31%
+T3 RESULT: File dmft.csv: Ratio = 10.10%
+T3 RESULT: File wildcat.csv: Ratio = 27.85%
+T3 RESULT: File cancerrate.csv: Ratio = 2.78%
+T3 RESULT: File hurricanes.csv: Ratio = 4.31%
+T3 RESULT: File assessment.csv: Ratio = 2.08%
+T3 RESULT: File michiganacc.csv: Ratio = 0.00%
+T3 RESULT: File hivcd4cd8.csv: Ratio = 42.59%
+T3 RESULT: File hiroshima.csv: Ratio = 23.13%
+T3 RESULT: File apnea1.csv: Ratio = 14.29%
+T3 RESULT: File whale.csv: Ratio = 14.25%
+T3 RESULT: File birthday.csv: Ratio = 2.05%
+T3 RESULT: File hivtrans2.csv: Ratio = 0.00%
+T3 RESULT: File creditscore.csv: Ratio = 41.87%
+T3 RESULT: File uktrainacc.csv: Ratio = 45.59%
+T3 RESULT: File boxing1.csv: Ratio = 0.00%
+T3 RESULT: File tornado.csv: Ratio = 10.50%
+T3 RESULT: File hivtrans1.csv: Ratio = 0.00%
+T3 RESULT: File chall2.csv: Ratio = 9.17%
+T3 RESULT: File vehicle.csv: Ratio = 0.00%
+T3 RESULT: File enrollment.csv: Ratio = 0.00%
+T3 RESULT: File mapleleafs.csv: Ratio = 0.00%
+T3 RESULT: File japansolvent.csv: Ratio = 4.72%
+T3 RESULT: File mines.csv: Ratio = 39.16%
+T3 RESULT: File shampoo.csv: Ratio = 6.25%
+T3 RESULT: File impeach.csv: Ratio = 5.22%
+T3 RESULT: File donner.csv: Ratio = 6.03%
+T3 RESULT: File happiness.csv: Ratio = 0.41%
+T3 RESULT: File runshoes.csv: Ratio = 28.02%
+T3 RESULT: File chall101.csv: Ratio = 30.94%
+T3 RESULT: File ncaa.csv: Ratio = 75.87%
+T3 RESULT: File olympic2000.csv: Ratio = 5.74%
+T3 RESULT: File sexpartners.csv: Ratio = 13.94%
+T3 RESULT: File soccer.csv: Ratio = 18.18%
+T3 RESULT: File randomgen.csv: Ratio = 3.25%
+T3 RESULT: File gmat.csv: Ratio = 9.74%
+T3 RESULT: File homerun.csv: Ratio = 28.22%
+T3 RESULT: File reviewer.csv: Ratio = 41.46%
+T3 RESULT: File broadway.csv: Ratio = 12.08%
+T3 RESULT: File votesurvey.csv: Ratio = 0.00%
+T3 RESULT: File challenger.csv: Ratio = 20.14%
+T3 RESULT: File ossification.csv: Ratio = 6.50%
+T3 RESULT: File floridashark.csv: Ratio = 24.09%
+T3 RESULT: File devils.csv: Ratio = 5.42%
+T3 RESULT: File broadwaymult.csv: Ratio = 6.34%
+T3 RESULT: File halloffame.csv: Ratio = 5.16%
+T3 RESULT: File apnea3.csv: Ratio = 13.14%
+T3 RESULT: File AIDS.csv: Ratio = 0.00%
+T3 RESULT: File gviolence.csv: Ratio = 32.40%
+T3 RESULT: File beetles.csv: Ratio = 0.00%
+T3 RESULT: File benford.csv: Ratio = 0.00%
+T3 RESULT: File anscombe.csv: Ratio = 0.00%
+T3 RESULT: Rows: Max = 4053, Min = 5, Avg = 219.17
+T3 RESULT: Cols: Max = 71, Min = 2, Avg = 7.80
 === T3 Report End ===
-=== T2 Completed ===
-=== T2 Report Start ===
-
-T2 RESULT: File lawsuit.csv : Max = 17, Min = 3, Avg = 17.000, Var = 93.500
-
-T2 RESULT: File famufsu.csv : Max = 9, Min = 0, Avg = 6.000, Var = 34.794
-
-T2 RESULT: File authorship.csv : Max = 11, Min = 0, Avg = 1.000, Var = 1.576
-
-T2 RESULT: File vineyard.csv : Max = 5, Min = 3, Avg = 4.000, Var = 1.192
-
-T2 RESULT: File election2000.csv : Max = 12, Min = 0, Avg = 10.000, Var = 44.490
-
-T2 RESULT: File bankruptcy.csv : Max = 16, Min = 2, Avg = 16.000, Var = 139.437
-
-T2 RESULT: File marketing.csv : Max = 3, Min = 2, Avg = 3.000, Var = 4.420
-
-T2 RESULT: File currency.csv : Max = 18, Min = 0, Avg = 9.000, Var = 45.838
-
-T2 RESULT: File apnea2.csv : Max = 11, Min = 0, Avg = 2.000, Var = 4.062
-
-T2 RESULT: File uklottery.csv : Max = 12, Min = 6, Avg = 6.000, Var = 40.062
-
-T2 RESULT: File neavote.csv : Max = 11, Min = 0, Avg = 4.000, Var = 11.537
-
-T2 RESULT: File supreme.csv : Max = 24, Min = 7, Avg = 13.000, Var = 36.077
-
-T2 RESULT: File boxing2.csv : Max = 24, Min = 0, Avg = 12.000, Var = 131.431
-
-T2 RESULT: File asbestos.csv : Max = 24, Min = 0, Avg = 4.000, Var = 16.430
-
-T2 RESULT: File germangss.csv : Max = 24, Min = 0, Avg = 9.000, Var = 78.267
-
-T2 RESULT: File galapagos.csv : Max = 27, Min = 2, Avg = 4.000, Var = 44.386
-
-T2 RESULT: File braziltourism.csv : Max = 13, Min = 3, Avg = 3.000, Var = 38.798
-
-T2 RESULT: File cyyoung9302.csv : Max = 15, Min = 0, Avg = 4.000, Var = 13.450
-
-T2 RESULT: File cyyoung8092.csv : Max = 15, Min = 0, Avg = 4.000, Var = 13.603
-
-T2 RESULT: File titanic.csv : Max = 15, Min = 2, Avg = 11.000, Var = 56.991
-
-T2 RESULT: File esr.csv : Max = 14, Min = 3, Avg = 10.000, Var = 60.996
-
-T2 RESULT: File lda.csv : Max = 15, Min = 1, Avg = 1.000, Var = 52.722
-
-T2 RESULT: File kotzehawk.csv : Max = 1, Min = 1, Avg = -nan, Var = -52.722
-
-T2 RESULT: File negotiation.csv : Max = 20, Min = 0, Avg = 9.000, Var = 45.755
-
-T2 RESULT: File lalottery.csv : Max = 15, Min = 5, Avg = 5.000, Var = 145.755
-
-T2 RESULT: File winterolympic.csv : Max = 15, Min = 2, Avg = 4.000, Var = 16.910
-
-T2 RESULT: File fraud.csv : Max = 5, Min = 3, Avg = 3.000, Var = 2.537
-
-T2 RESULT: File seropositive.csv : Max = 11, Min = 0, Avg = 3.000, Var = 5.982
-
-T2 RESULT: File menarche.csv : Max = 12, Min = 3, Avg = 3.000, Var = 45.491
-
-T2 RESULT: File draft.csv : Max = 24, Min = 2, Avg = 11.000, Var = 100.082
-
-T2 RESULT: File chlamydia.csv : Max = 24, Min = 0, Avg = 3.000, Var = 12.202
-
-T2 RESULT: File bondrate.csv : Max = 21, Min = 0, Avg = 9.000, Var = 68.310
-
-T2 RESULT: File gsssexsurvey.csv : Max = 18, Min = 3, Avg = 7.000, Var = 41.146
-
-T2 RESULT: File dmft.csv : Max = 18, Min = 0, Avg = 10.000, Var = 98.284
-
-T2 RESULT: File wildcat.csv : Max = 15, Min = 5, Avg = 10.000, Var = 34.857
-
-T2 RESULT: File cancerrate.csv : Max = 18, Min = 2, Avg = 7.000, Var = 23.466
-
-T2 RESULT: File hurricanes.csv : Max = 5, Min = 4, Avg = 4.000, Var = 24.466
-
-T2 RESULT: File assessment.csv : Max = 26, Min = 14, Avg = 21.000, Var = 16.031
-
-T2 RESULT: File michiganacc.csv : Max = 25, Min = 0, Avg = 10.000, Var = 84.446
-
-T2 RESULT: File hivcd4cd8.csv : Max = 13, Min = 5, Avg = 8.000, Var = 23.689
-
-T2 RESULT: File hiroshima.csv : Max = 14, Min = 4, Avg = 4.000, Var = 86.345
-
-T2 RESULT: File apnea1.csv : Max = 23, Min = 0, Avg = 2.000, Var = 7.279
-
-T2 RESULT: File whale.csv : Max = 14, Min = 11, Avg = 13.000, Var = 2.183
-
-T2 RESULT: File birthday.csv : Max = 22, Min = 0, Avg = 5.000, Var = 25.544
-
-T2 RESULT: File hivtrans2.csv : Max = 13, Min = 5, Avg = 10.000, Var = 19.886
-
-T2 RESULT: File creditscore.csv : Max = 23, Min = 3, Avg = 3.000, Var = 224.648
-
-T2 RESULT: File uktrainacc.csv : Max = 20, Min = 4, Avg = 4.000, Var = 116.478
-
-T2 RESULT: File boxing1.csv : Max = 20, Min = 0, Avg = 20.000, Var = 367.169
-
-T2 RESULT: File tornado.csv : Max = 20, Min = 2, Avg = 4.000, Var = 35.355
-
-T2 RESULT: File hivtrans1.csv : Max = 13, Min = 3, Avg = 3.000, Var = 57.339
-
-T2 RESULT: File chall2.csv : Max = 11, Min = 4, Avg = 4.000, Var = 35.085
-
-T2 RESULT: File vehicle.csv : Max = 20, Min = 0, Avg = 3.000, Var = 17.284
-
-T2 RESULT: File enrollment.csv : Max = 11, Min = 5, Avg = 6.000, Var = 21.642
-
-T2 RESULT: File mapleleafs.csv : Max = 20, Min = 0, Avg = 4.000, Var = 17.116
-
-T2 RESULT: File japansolvent.csv : Max = 20, Min = 2, Avg = 15.000, Var = 112.707
-
-T2 RESULT: File mines.csv : Max = 23, Min = 4, Avg = 23.000, Var = 331.236
-
-T2 RESULT: File shampoo.csv : Max = 19, Min = 14, Avg = 14.000, Var = 356.236
-
-T2 RESULT: File impeach.csv : Max = 20, Min = 0, Avg = 6.000, Var = 34.748
-
-T2 RESULT: File donner.csv : Max = 20, Min = 2, Avg = 2.000, Var = 31.521
-
-T2 RESULT: File happiness.csv : Max = 20, Min = 2, Avg = 18.000, Var = 178.167
-
-T2 RESULT: File runshoes.csv : Max = 20, Min = 2, Avg = 4.000, Var = 18.931
-
-T2 RESULT: File chall101.csv : Max = 11, Min = 7, Avg = 11.000, Var = 21.965
-
-T2 RESULT: File ncaa.csv : Max = 13, Min = 2, Avg = 11.000, Var = 63.314
-
-T2 RESULT: File olympic2000.csv : Max = 14, Min = 0, Avg = 5.000, Var = 9.927
-
-T2 RESULT: File sexpartners.csv : Max = 6, Min = 4, Avg = 4.000, Var = 13.927
-
-T2 RESULT: File soccer.csv : Max = 20, Min = 8, Avg = 9.000, Var = 37.655
-
-T2 RESULT: File randomgen.csv : Max = 17, Min = 2, Avg = 8.000, Var = 24.539
-
-T2 RESULT: File gmat.csv : Max = 19, Min = 3, Avg = 19.000, Var = 168.635
-
-T2 RESULT: File homerun.csv : Max = 14, Min = 0, Avg = 4.000, Var = 15.955
-
-T2 RESULT: File reviewer.csv : Max = 14, Min = 0, Avg = 9.000, Var = 79.016
-
-T2 RESULT: File broadway.csv : Max = 31, Min = 0, Avg = 31.000, Var = 903.966
-
-T2 RESULT: File votesurvey.csv : Max = 19, Min = 0, Avg = 4.000, Var = 28.450
-
-T2 RESULT: File challenger.csv : Max = 12, Min = 4, Avg = 4.000, Var = 35.090
-
-T2 RESULT: File ossification.csv : Max = 17, Min = 0, Avg = 8.000, Var = 25.230
-
-T2 RESULT: File floridashark.csv : Max = 10, Min = 4, Avg = 4.000, Var = 35.410
-
-T2 RESULT: File devils.csv : Max = 13, Min = 5, Avg = 5.000, Var = 99.410
-
-T2 RESULT: File broadwaymult.csv : Max = 31, Min = 0, Avg = 31.000, Var = 942.404
-
-T2 RESULT: File halloffame.csv : Max = 15, Min = 0, Avg = 11.000, Var = 119.244
-
-T2 RESULT: File apnea3.csv : Max = 15, Min = 0, Avg = 2.000, Var = 5.459
-
-T2 RESULT: File AIDS.csv : Max = 31, Min = 0, Avg = 6.000, Var = 25.644
-
-T2 RESULT: File gviolence.csv : Max = 23, Min = 0, Avg = 14.000, Var = 97.658
-
-T2 RESULT: File beetles.csv : Max = 8, Min = 5, Avg = 8.000, Var = 55.329
-
-T2 RESULT: File benford.csv : Max = 19, Min = 5, Avg = 5.000, Var = 101.722
-
-T2 RESULT: File anscombe.csv : Max = 2, Min = 2, Avg = 2.000, Var = 14.532
-=== T2 Report End ===
-=== T1 Completed ===
-=== T1 Report Start ===
-T1 RESULT: File lawsuit.csv: Total number of unique words: 5
-T1 RESULT: File famufsu.csv: Total number of unique words: 6
-T1 RESULT: File authorship.csv: Total number of unique words: 75
-T1 RESULT: File vineyard.csv: Total number of unique words: 4
-T1 RESULT: File election2000.csv: Total number of unique words: 72
-T1 RESULT: File bankruptcy.csv: Total number of unique words: 73
-T1 RESULT: File marketing.csv: Total number of unique words: 0
-T1 RESULT: File currency.csv: Total number of unique words: 52
-T1 RESULT: File apnea2.csv: Total number of unique words: 9
-T1 RESULT: File uklottery.csv: Total number of unique words: 3
-T1 RESULT: File neavote.csv: Total number of unique words: 106
-T1 RESULT: File supreme.csv: Total number of unique words: 15
-T1 RESULT: File boxing2.csv: Total number of unique words: 31
-T1 RESULT: File asbestos.csv: Total number of unique words: 16
-T1 RESULT: File germangss.csv: Total number of unique words: 23
-T1 RESULT: File galapagos.csv: Total number of unique words: 35
-T1 RESULT: File braziltourism.csv: Total number of unique words: 12
-T1 RESULT: File cyyoung9302.csv: Total number of unique words: 92
-T1 RESULT: File cyyoung8092.csv: Total number of unique words: 95
-T1 RESULT: File titanic.csv: Total number of unique words: 17
-T1 RESULT: File esr.csv: Total number of unique words: 4
-T1 RESULT: File lda.csv: Total number of unique words: 10
-T1 RESULT: File kotzehawk.csv: Total number of unique words: 0
-T1 RESULT: File negotiation.csv: Total number of unique words: 11
-T1 RESULT: File lalottery.csv: Total number of unique words: 4
-T1 RESULT: File winterolympic.csv: Total number of unique words: 35
-T1 RESULT: File fraud.csv: Total number of unique words: 2
-T1 RESULT: File seropositive.csv: Total number of unique words: 7
-T1 RESULT: File menarche.csv: Total number of unique words: 3
-T1 RESULT: File draft.csv: Total number of unique words: 3
-T1 RESULT: File chlamydia.csv: Total number of unique words: 13
-T1 RESULT: File bondrate.csv: Total number of unique words: 95
-T1 RESULT: File gsssexsurvey.csv: Total number of unique words: 17
-T1 RESULT: File dmft.csv: Total number of unique words: 20
-T1 RESULT: File wildcat.csv: Total number of unique words: 8
-T1 RESULT: File cancerrate.csv: Total number of unique words: 12
-T1 RESULT: File hurricanes.csv: Total number of unique words: 2
-T1 RESULT: File assessment.csv: Total number of unique words: 9
-T1 RESULT: File michiganacc.csv: Total number of unique words: 23
-T1 RESULT: File hivcd4cd8.csv: Total number of unique words: 4
-T1 RESULT: File hiroshima.csv: Total number of unique words: 4
-T1 RESULT: File apnea1.csv: Total number of unique words: 8
-T1 RESULT: File whale.csv: Total number of unique words: 6
-T1 RESULT: File birthday.csv: Total number of unique words: 12
-T1 RESULT: File hivtrans2.csv: Total number of unique words: 8
-T1 RESULT: File creditscore.csv: Total number of unique words: 7
-T1 RESULT: File uktrainacc.csv: Total number of unique words: 15
-T1 RESULT: File boxing1.csv: Total number of unique words: 23
-T1 RESULT: File tornado.csv: Total number of unique words: 19
-T1 RESULT: File hivtrans1.csv: Total number of unique words: 7
-T1 RESULT: File chall2.csv: Total number of unique words: 5
-T1 RESULT: File vehicle.csv: Total number of unique words: 11
-T1 RESULT: File enrollment.csv: Total number of unique words: 4
-T1 RESULT: File mapleleafs.csv: Total number of unique words: 7
-T1 RESULT: File japansolvent.csv: Total number of unique words: 108
-T1 RESULT: File mines.csv: Total number of unique words: 4
-T1 RESULT: File shampoo.csv: Total number of unique words: 4
-T1 RESULT: File impeach.csv: Total number of unique words: 168
-T1 RESULT: File donner.csv: Total number of unique words: 8
-T1 RESULT: File happiness.csv: Total number of unique words: 13
-T1 RESULT: File runshoes.csv: Total number of unique words: 14
-T1 RESULT: File chall101.csv: Total number of unique words: 3
-T1 RESULT: File ncaa.csv: Total number of unique words: 5
-T1 RESULT: File olympic2000.csv: Total number of unique words: 83
-T1 RESULT: File sexpartners.csv: Total number of unique words: 2
+of unique words: 2
 T1 RESULT: File soccer.csv: Total number of unique words: 12
 T1 RESULT: File randomgen.csv: Total number of unique words: 7
 T1 RESULT: File gmat.csv: Total number of unique words: 8
@@ -687,3 +231,35 @@ T1 RESULT: File beetles.csv: Total number of unique words: 4
 T1 RESULT: File benford.csv: Total number of unique words: 7
 T1 RESULT: File anscombe.csv: Total number of unique words: 0
 === T1 Report End ===
+File mapleleafs.csv : Max = 20, Min = 0, Avg = 4.000, Var = 17.110
+T2 RESULT: File japansolvent.csv : Max = 20, Min = 0, Avg = 15.000, Var = 186.488
+T2 RESULT: File mines.csv : Max = 20, Min = 2, Avg = 9.000, Var = 34.112
+T2 RESULT: File shampoo.csv : Max = 19, Min = 14, Avg = 14.000, Var = 59.112
+T2 RESULT: File impeach.csv : Max = 20, Min = 0, Avg = 6.000, Var = 34.330
+T2 RESULT: File donner.csv : Max = 20, Min = 0, Avg = 2.000, Var = 23.854
+T2 RESULT: File happiness.csv : Max = 20, Min = 0, Avg = 5.000, Var = 21.689
+T2 RESULT: File runshoes.csv : Max = 20, Min = 2, Avg = 4.000, Var = 16.696
+T2 RESULT: File chall101.csv : Max = 11, Min = 7, Avg = 11.000, Var = 20.848
+T2 RESULT: File ncaa.csv : Max = 13, Min = 0, Avg = 11.000, Var = 90.546
+T2 RESULT: File olympic2000.csv : Max = 14, Min = 0, Avg = 5.000, Var = 10.725
+T2 RESULT: File sexpartners.csv : Max = 6, Min = 4, Avg = 4.000, Var = 14.725
+T2 RESULT: File soccer.csv : Max = 20, Min = 8, Avg = 9.000, Var = 37.787
+T2 RESULT: File randomgen.csv : Max = 17, Min = 2, Avg = 8.000, Var = 26.376
+T2 RESULT: File gmat.csv : Max = 19, Min = 3, Avg = 19.000, Var = 169.094
+T2 RESULT: File homerun.csv : Max = 14, Min = 0, Avg = 4.000, Var = 15.946
+T2 RESULT: File reviewer.csv : Max = 14, Min = 0, Avg = 9.000, Var = 79.016
+T2 RESULT: File broadway.csv : Max = 31, Min = 0, Avg = 31.000, Var = 903.966
+T2 RESULT: File votesurvey.csv : Max = 19, Min = 0, Avg = 4.000, Var = 28.450
+T2 RESULT: File challenger.csv : Max = 12, Min = 4, Avg = 4.000, Var = 35.090
+T2 RESULT: File ossification.csv : Max = 17, Min = 0, Avg = 8.000, Var = 25.230
+T2 RESULT: File floridashark.csv : Max = 10, Min = 4, Avg = 4.000, Var = 35.410
+T2 RESULT: File devils.csv : Max = 13, Min = 5, Avg = 5.000, Var = 99.410
+T2 RESULT: File broadwaymult.csv : Max = 31, Min = 0, Avg = 31.000, Var = 942.404
+T2 RESULT: File halloffame.csv : Max = 15, Min = 0, Avg = 11.000, Var = 119.244
+T2 RESULT: File apnea3.csv : Max = 15, Min = 0, Avg = 2.000, Var = 5.459
+T2 RESULT: File AIDS.csv : Max = 31, Min = 0, Avg = 6.000, Var = 28.334
+T2 RESULT: File gviolence.csv : Max = 23, Min = 0, Avg = 14.000, Var = 97.691
+T2 RESULT: File beetles.csv : Max = 8, Min = 5, Avg = 8.000, Var = 55.345
+T2 RESULT: File benford.csv : Max = 19, Min = 5, Avg = 5.000, Var = 101.724
+T2 RESULT: File anscombe.csv : Max = 2, Min = 2, Avg = 2.000, Var = 14.532
+=== T2 Report End ===
