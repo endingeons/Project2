@@ -68,7 +68,7 @@ int main(int argc, char *argv[]){
 	fputs(buffer, fp_output);
 	fclose(fp_output);	
 
-	printf("Get scheduling policy\n");
+	//printf("Get scheduling policy\n");
 	if (pthread_attr_getschedpolicy(&attr, &policy) != 0)
 		fprintf(stderr, "Unable to get policy.\n");
 
@@ -91,7 +91,7 @@ int main(int argc, char *argv[]){
 	{
 		mode = MULTI_THREAD;
 		if (!strcmp(argv[2], "sched")){
-			printf("sched\n");
+			//printf("sched\n");
 			if(!strcmp(argv[3], "RR"))
 				policy = SCHED_RR;
 			else if(!strcmp(argv[3], "FIFO"))
@@ -138,12 +138,6 @@ int main(int argc, char *argv[]){
 			printf("Changing scheduling policy to: ");
 			if (pthread_attr_setschedpolicy(&attr, policy) != 0)
 				fprintf(stderr, "Unable to set policy.\n");
-			if (policy == SCHED_OTHER)
-				printf("SCHED_OTHER\n");
-			else if (policy == SCHED_RR)
-				printf("SCHED_RR\n");
-			else if (policy == SCHED_FIFO)
-				printf("SCHED_FIFO\n");
 		}
 		else if(priority == LOW){
 			printf("Priority set to: LOW\n");
@@ -155,6 +149,15 @@ int main(int argc, char *argv[]){
 		for(int i = 0; i < NUM_THREADS; i++){
 			pthread_create(&tid_task[i], &attr, f[i], NULL);
 		}
+		if (pthread_attr_getschedpolicy(&attr, &policy) != 0)
+			fprintf(stderr, "Unable to get policy.\n");
+		if (policy == SCHED_OTHER)
+				printf("SCHED_OTHER\n");
+			else if (policy == SCHED_RR)
+				printf("SCHED_RR\n");
+			else if (policy == SCHED_FIFO)
+				printf("SCHED_FIFO\n");
+
 		for(int i = 0; i < NUM_THREADS; i++){
 			pthread_join(tid_task[i],NULL);
 		}
