@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <ctype.h>
+#include <sched.h>
 
 #define NUM_FILES 84
 #define NUM_THREADS 3
@@ -45,9 +46,10 @@ int main(int argc, char *argv[]){
 	begin = clock();
 	pthread_t tid_task[NUM_THREADS];
 	pthread_attr_t attr;
-	int policy, single_thread_task, num_tasks, priority_task;
+	int policy, single_thread_task, num_tasks, priority_task,prio;
 	threading_mode_t mode;
 	priority_flag_t priority;
+	struct sched_param schedparam;
 
 	void *(f[])  = {runner1, runner2, runner3};
 	/* TODO: Grant root privileges for policy and sched change */
@@ -56,6 +58,9 @@ int main(int argc, char *argv[]){
 	pthread_mutex_init (&lock, NULL);
 	pthread_mutex_init (&write_lock, NULL);
 	getCSVfilenames();
+
+	pthread_attr_setinheritsched(&attr, PTHREAD_EXPLICIT_SCHED);
+
 	// for(int i = 0; i < NUM_FILES; i++){
 	// 	printf("%d\t", i+1);
 	// 	printf("%s\n",analcatdata_filenames[i]);
@@ -87,7 +92,7 @@ int main(int argc, char *argv[]){
 		printf("Set mode to MULTI_THREAD\n");
 		mode = MULTI_THREAD;
 	}
-	else if(!strcmp(argv[1], "multi") && argc == 4)
+	else if(!strcmp(argv[1], "multi") && ( (argc == 4) || (argc == 5) ) )
 	{
 		mode = MULTI_THREAD;
 		if (!strcmp(argv[2], "sched")){
@@ -145,16 +150,80 @@ int main(int argc, char *argv[]){
 			else if (policy == SCHED_FIFO)
 				printf("SCHED_FIFO\n");
 		}
-		else if(priority == LOW){
-			printf("Priority set to: LOW\n");
-			/* Do we support priority change on all tasks or just one? Up to us...*/
-		}
-		else if(priority == HIGH){
-			printf("Priority set to: HIGH\n");
-		}
-		for(int i = 0; i < NUM_THREADS; i++){
+
+		if (argc == 2)
+		{
+			for(int i = 0; i < NUM_THREADS; i++)
 			pthread_create(&tid_task[i], &attr, f[i], NULL);
 		}
+		else if(priority == LOW)
+		{
+			
+			printf("Priority set to: LOW\n");
+			/* Do we support priority change on all tasks or just one? Up to us...*/
+			schedparam.sched_priority = 1;
+			pthread_attr_setschedparam(&attr, &schedparam);
+
+			if (!strcmp(argv[3],"1"))
+			{
+				pthread_create(&tid_task[0],&attr,runner1, NULL);
+				schedparam.sched_priority = 99;
+				pthread_attr_setschedparam(&attr, &schedparam);
+				pthread_create(&tid_task[1],&attr,runner2, NULL);
+				pthread_create(&tid_task[2],&attr,runner3, NULL);	
+			}
+			else if (!strcmp(argv[3],"2"))
+			{
+				pthread_create(&tid_task[0],&attr,runner2, NULL);
+				schedparam.sched_priority = 99;
+				pthread_attr_setschedparam(&attr, &schedparam);
+				pthread_create(&tid_task[1],&attr,runner1, NULL);
+				pthread_create(&tid_task[2],&attr,runner3, NULL);				
+			}
+			else if (!strcmp(argv[3],"3"))
+			{
+				pthread_create(&tid_task[0],&attr,runner3, NULL);
+				schedparam.sched_priority = 99;
+				pthread_attr_setschedparam(&attr, &schedparam);
+				pthread_create(&tid_task[1],&attr,runner1, NULL);
+				pthread_create(&tid_task[2],&attr,runner2, NULL);				
+			}
+
+		}
+		else if(priority == HIGH)
+		{
+			printf("Priority set to: HIGH\n");
+			schedparam.sched_priority = 99;
+			pthread_attr_setschedparam(&attr, &schedparam);
+
+			if (!strcmp(argv[3],"1"))
+			{
+				pthread_create(&tid_task[0],&attr,runner1, NULL);
+				schedparam.sched_priority = 1;
+				pthread_attr_setschedparam(&attr, &schedparam);
+				pthread_create(&tid_task[1],&attr,runner2, NULL);
+				pthread_create(&tid_task[2],&attr,runner3, NULL);
+			}
+			else if (!strcmp(argv[3],"2"))
+			{
+				pthread_create(&tid_task[0],&attr,runner2, NULL);
+				schedparam.sched_priority = 1;
+				pthread_attr_setschedparam(&attr, &schedparam);
+				pthread_create(&tid_task[1],&attr,runner1, NULL);
+				pthread_create(&tid_task[2],&attr,runner3, NULL);				
+			}
+			else if (!strcmp(argv[3],"3"))
+			{
+				pthread_create(&tid_task[0],&attr,runner3, NULL);
+				schedparam.sched_priority = 1;
+				pthread_attr_setschedparam(&attr, &schedparam);
+				pthread_create(&tid_task[1],&attr,runner1, NULL);
+				pthread_create(&tid_task[2],&attr,runner2, NULL);				
+			}				
+
+		}
+
+
 		for(int i = 0; i < NUM_THREADS; i++){
 			pthread_join(tid_task[i],NULL);
 		}
