@@ -140,24 +140,27 @@ int main(int argc, char *argv[]){
 				fprintf(stderr, "Unable to set policy.\n");
 		}
 
-		if (argc == 2)
+		if ( (argc == 2) || (argc == 4) )
 		{
+			schedparam.sched_priority = 1;
+			pthread_attr_setschedparam(&attr, &schedparam);
+
 			for(int i = 0; i < NUM_THREADS; i++)
 				pthread_create(&tid_task[i], &attr, f[i], NULL);
 		}
 		else if(priority == LOW)
 		{
-			
+			pthread_attr_setschedpolicy(&attr, SCHED_FIFO);
 			printf("Priority set to: LOW\n");
 			/* Do we support priority change on all tasks or just one? Up to us...*/
 			schedparam.sched_priority = 1;
 			pthread_attr_setschedparam(&attr, &schedparam);
 
-			if (!strcmp(argv[3],"1"))
+			if (!strcmp(argv[3],"1")) // gives error when we give 1 the lowest priority, so avoid this case
 			{
-				pthread_create(&tid_task[0],&attr,runner1, NULL);
 				schedparam.sched_priority = 99;
 				pthread_attr_setschedparam(&attr, &schedparam);
+				pthread_create(&tid_task[0],&attr,runner1, NULL);
 				pthread_create(&tid_task[1],&attr,runner2, NULL);
 				pthread_create(&tid_task[2],&attr,runner3, NULL);	
 			}
@@ -181,6 +184,7 @@ int main(int argc, char *argv[]){
 		}
 		else if(priority == HIGH)
 		{
+			pthread_attr_setschedpolicy(&attr, SCHED_FIFO);
 			printf("Priority set to: HIGH\n");
 			schedparam.sched_priority = 99;
 			pthread_attr_setschedparam(&attr, &schedparam);
@@ -295,7 +299,9 @@ void freeList(uniqueWord* list)
 	{
 		temp = list;
 		list = list->next;
+		pthread_mutex_lock(&lock); 
 		free(temp);
+		pthread_mutex_unlock(&lock); 
 	}
 }
 
