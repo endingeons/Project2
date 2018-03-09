@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <ctype.h>
+#include <sched.h>
 
 #define NUM_FILES 84
 #define NUM_THREADS 3
@@ -45,9 +46,10 @@ int main(int argc, char *argv[]){
 	begin = clock();
 	pthread_t tid_task[NUM_THREADS];
 	pthread_attr_t attr;
-	int policy, single_thread_task, num_tasks, priority_task;
+	int policy, single_thread_task, num_tasks, priority_task,prio;
 	threading_mode_t mode;
 	priority_flag_t priority;
+	struct sched_param schedparam;
 
 	void *(f[])  = {runner1, runner2, runner3};
 	/* TODO: Grant root privileges for policy and sched change */
@@ -56,6 +58,9 @@ int main(int argc, char *argv[]){
 	pthread_mutex_init (&lock, NULL);
 	pthread_mutex_init (&write_lock, NULL);
 	getCSVfilenames();
+
+	pthread_attr_setinheritsched(&attr, PTHREAD_EXPLICIT_SCHED);
+
 	// for(int i = 0; i < NUM_FILES; i++){
 	// 	printf("%d\t", i+1);
 	// 	printf("%s\n",analcatdata_filenames[i]);
@@ -84,10 +89,9 @@ int main(int argc, char *argv[]){
 	}
 	else if (!strcmp(argv[1], "multi") && argc == 2)
 	{
-		printf("Set mode to MULTI_THREAD\n");
 		mode = MULTI_THREAD;
 	}
-	else if(!strcmp(argv[1], "multi") && argc == 4)
+	else if(!strcmp(argv[1], "multi") && ( (argc == 4) || (argc == 5) ) )
 	{
 		mode = MULTI_THREAD;
 		if (!strcmp(argv[2], "sched")){
@@ -124,8 +128,6 @@ int main(int argc, char *argv[]){
 		printf("***ERROR: Please select a mode for running (single or multi threaded).\n");
 		exit(1);
 	}
-	
-	printf("Current mode: %d\n", (int)mode);
 
 	/* How many threads should run? */
 	if(mode == SINGLE_THREAD){
@@ -133,30 +135,82 @@ int main(int argc, char *argv[]){
 		pthread_join(tid_task[0], NULL);
 	}
 	else if(mode == MULTI_THREAD){
-		printf("Running in multi-threaded mode\n");
 		if((policy == SCHED_RR) || (policy == SCHED_FIFO)){
-			printf("Changing scheduling policy to: ");
 			if (pthread_attr_setschedpolicy(&attr, policy) != 0)
 				fprintf(stderr, "Unable to set policy.\n");
 		}
-		else if(priority == LOW){
+
+		if (argc == 2)
+		{
+			for(int i = 0; i < NUM_THREADS; i++)
+				pthread_create(&tid_task[i], &attr, f[i], NULL);
+		}
+		else if(priority == LOW)
+		{
+			
 			printf("Priority set to: LOW\n");
 			/* Do we support priority change on all tasks or just one? Up to us...*/
+			schedparam.sched_priority = 1;
+			pthread_attr_setschedparam(&attr, &schedparam);
+
+			if (!strcmp(argv[3],"1"))
+			{
+				pthread_create(&tid_task[0],&attr,runner1, NULL);
+				schedparam.sched_priority = 99;
+				pthread_attr_setschedparam(&attr, &schedparam);
+				pthread_create(&tid_task[1],&attr,runner2, NULL);
+				pthread_create(&tid_task[2],&attr,runner3, NULL);	
+			}
+			else if (!strcmp(argv[3],"2"))
+			{
+				pthread_create(&tid_task[0],&attr,runner2, NULL);
+				schedparam.sched_priority = 99;
+				pthread_attr_setschedparam(&attr, &schedparam);
+				pthread_create(&tid_task[1],&attr,runner1, NULL);
+				pthread_create(&tid_task[2],&attr,runner3, NULL);				
+			}
+			else if (!strcmp(argv[3],"3"))
+			{
+				pthread_create(&tid_task[0],&attr,runner3, NULL);
+				schedparam.sched_priority = 99;
+				pthread_attr_setschedparam(&attr, &schedparam);
+				pthread_create(&tid_task[1],&attr,runner1, NULL);
+				pthread_create(&tid_task[2],&attr,runner2, NULL);				
+			}
+
 		}
-		else if(priority == HIGH){
+		else if(priority == HIGH)
+		{
 			printf("Priority set to: HIGH\n");
+			schedparam.sched_priority = 99;
+			pthread_attr_setschedparam(&attr, &schedparam);
+
+			if (!strcmp(argv[3],"1"))
+			{
+				pthread_create(&tid_task[0],&attr,runner1, NULL);
+				schedparam.sched_priority = 1;
+				pthread_attr_setschedparam(&attr, &schedparam);
+				pthread_create(&tid_task[1],&attr,runner2, NULL);
+				pthread_create(&tid_task[2],&attr,runner3, NULL);
+			}
+			else if (!strcmp(argv[3],"2"))
+			{
+				pthread_create(&tid_task[0],&attr,runner2, NULL);
+				schedparam.sched_priority = 1;
+				pthread_attr_setschedparam(&attr, &schedparam);
+				pthread_create(&tid_task[1],&attr,runner1, NULL);
+				pthread_create(&tid_task[2],&attr,runner3, NULL);				
+			}
+			else if (!strcmp(argv[3],"3"))
+			{
+				pthread_create(&tid_task[0],&attr,runner3, NULL);
+				schedparam.sched_priority = 1;
+				pthread_attr_setschedparam(&attr, &schedparam);
+				pthread_create(&tid_task[1],&attr,runner1, NULL);
+				pthread_create(&tid_task[2],&attr,runner2, NULL);				
+			}				
+
 		}
-		for(int i = 0; i < NUM_THREADS; i++){
-			pthread_create(&tid_task[i], &attr, f[i], NULL);
-		}
-		if (pthread_attr_getschedpolicy(&attr, &policy) != 0)
-			fprintf(stderr, "Unable to get policy.\n");
-		if (policy == SCHED_OTHER)
-				printf("SCHED_OTHER\n");
-			else if (policy == SCHED_RR)
-				printf("SCHED_RR\n");
-			else if (policy == SCHED_FIFO)
-				printf("SCHED_FIFO\n");
 
 		for(int i = 0; i < NUM_THREADS; i++){
 			pthread_join(tid_task[i],NULL);
@@ -389,19 +443,21 @@ void *runner1(void *param)
 	}
 
 	char buffer[100];
-	pthread_mutex_lock(&write_lock); 
+	//pthread_mutex_lock(&write_lock); 
 	fp_output = fopen(output_filepath,"ab");
 	int len = strlen("=== T1 Completed ===\n");
 	sprintf(buffer, "=== T1 Completed ===\n");
 	fputs(buffer, fp_output);
+	fflush(fp_output);
 	fclose(fp_output);	
 	buffer[0] = '\0';
-	pthread_mutex_unlock(&write_lock); 
+	//pthread_mutex_unlock(&write_lock); 
 	printf("=== T1 Completed ===\n");
 
 	/* do the reporting */
-	pthread_mutex_lock(&lock); 
+	//pthread_mutex_lock(&lock); 
 	pthread_mutex_lock(&write_lock); 
+	fflush(fp_output);
 	fp_output = fopen(output_filepath,"ab");
 	fputs("=== T1 Report Start ===\n", fp_output);
 	printf("=== T1 Report Start ===\n");
@@ -416,13 +472,16 @@ void *runner1(void *param)
 	clock_t time1 = clock();
 	double elapsed = (double)(time1 - begin) / CLOCKS_PER_SEC;
 	printf("T1 RESULT: Total elapsed time: %.2f\n",elapsed);
-
+	buffer[0] = '\0';
+	sprintf(buffer, "T1 RESULT: Total elapsed time: %.2f\n",elapsed);
+	fputs(buffer, fp_output);
 	printf("=== T1 Report End ===\n");
 	buffer[0] = '\0';
 	sprintf(buffer, "=== T1 Report End ===\n");
 	fputs(buffer, fp_output);
+	fclose(fp_output);
 	pthread_mutex_unlock(&write_lock); 
-	pthread_mutex_unlock(&lock);
+	//pthread_mutex_unlock(&lock);
 	pthread_exit(0);
 }
 /*
@@ -508,19 +567,21 @@ void *runner2(void *param)
 	}
 
 	char buffer[1000];
-	pthread_mutex_lock(&write_lock); 
+	//pthread_mutex_lock(&write_lock); 
 	fp_output = fopen(output_filepath,"ab");
 	int len = strlen("=== T2 Completed ===\n");
 	sprintf(buffer, "=== T2 Completed ===\n");
 	fputs(buffer, fp_output);
+	fflush(fp_output);
 	fclose(fp_output);	
 	buffer[0] = '\0';
-	pthread_mutex_unlock(&write_lock); 
+	//pthread_mutex_unlock(&write_lock); 
 	printf("=== T2 Completed ===\n");
 
 	/* do the reporting */
-	pthread_mutex_lock(&lock); 
-	pthread_mutex_unlock(&write_lock); 
+	//pthread_mutex_lock(&lock); 
+	pthread_mutex_lock(&write_lock); 
+	fflush(fp_output);
 	fp_output = fopen(output_filepath,"ab");
 	fputs("=== T2 Report Start ===\n", fp_output);
 	printf("=== T2 Report Start ===\n");
@@ -532,18 +593,20 @@ void *runner2(void *param)
 					analcatdata_filenames[i], max[i], min[i], avg[i], variance[i]);
 		fputs(buffer,fp_output);
 	}
-	printf("=== T2 Report End ===\n");
-	buffer[0] = '\0';
-	sprintf(buffer, "=== T2 Report End ===\n");
-	fputs(buffer, fp_output);
 
 	clock_t time2 = clock();
 	double elapsed = (double)(time2 - begin) / CLOCKS_PER_SEC;
 	printf("T2 RESULT: Total elapsed time: %.2f\n",elapsed);
-
+	buffer[0] = '\0';
+	sprintf(buffer, "T2 RESULT: Total elapsed time: %.2f\n",elapsed);
+	fputs(buffer, fp_output);
 	printf("=== T2 Report End ===\n");
+	buffer[0] = '\0';
+	sprintf(buffer, "=== T2 Report End ===\n");
+	fputs(buffer, fp_output);
+	fclose(fp_output);
 	pthread_mutex_unlock(&write_lock); 
-	pthread_mutex_unlock(&lock);
+	//pthread_mutex_unlock(&lock);
 	pthread_exit(0);
 }
 
@@ -725,19 +788,21 @@ void *runner3(void *param)
 	double avgCol = (double)sumCols / (double)NUM_FILES;
 
 	char buffer[1000];
-	pthread_mutex_lock(&write_lock); 
+	//pthread_mutex_lock(&write_lock); 
 	fp_output = fopen(output_filepath,"ab");
 	int len = strlen("=== T3 Completed ===\n");
 	sprintf(buffer, "=== T3 Completed ===\n");
 	fputs(buffer, fp_output);
+	fflush(fp_output);
 	fclose(fp_output);	
 	buffer[0] = '\0';
-	pthread_mutex_unlock(&write_lock); 
+	//pthread_mutex_unlock(&write_lock); 
 	printf("=== T3 Completed ===\n");
 
 	/* do the reporting */
-	pthread_mutex_lock(&lock); 
+	//pthread_mutex_lock(&lock); 
 	pthread_mutex_lock(&write_lock); 
+	fflush(fp_output);
 	fp_output = fopen(output_filepath,"ab");
 	fputs("=== T3 Report Start ===\n", fp_output);
 	printf("=== T3 Report Start ===\n");
@@ -758,13 +823,16 @@ void *runner3(void *param)
 	clock_t time3 = clock();
 	double elapsed = (double)(time3 - begin) / CLOCKS_PER_SEC;
 	printf("T3 RESULT: Total elapsed time: %.2f\n",elapsed);
-
+	buffer[0] = '\0';
+	sprintf(buffer, "T3 RESULT: Total elapsed time: %.2f\n",elapsed);
+	fputs(buffer, fp_output);
 	printf("=== T3 Report End ===\n");
 	buffer[0] = '\0';
 	sprintf(buffer, "=== T3 Report End ===\n");
 	fputs(buffer, fp_output);
+	fclose(fp_output);
 	pthread_mutex_unlock(&write_lock); 
-	pthread_mutex_unlock(&lock);
+	//pthread_mutex_unlock(&lock);
 	pthread_exit(0);
 }
 
