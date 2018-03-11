@@ -69,8 +69,8 @@ int main(int argc, char *argv[]){
 	/* Open output.txt file and clear its leftover contents */
 	char buffer [50];
 	fp_output = fopen(output_filepath,"w");
-	sprintf(buffer, "== main.c report output ==\n\n");
-	fputs(buffer, fp_output);
+	//sprintf(buffer, "== main.c report output ==\n\n");
+	//fputs(buffer, fp_output);
 	fclose(fp_output);	
 
 	//printf("Get scheduling policy\n");
@@ -234,9 +234,29 @@ int main(int argc, char *argv[]){
 	   */	
 	clock_t end = clock();
 	double elapsed = (double)(end - begin) / CLOCKS_PER_SEC;
-	printf("RESULT: Total elapsed time: %.2f\n",elapsed);
+
+	char buf[1000];
+	fp_output = fopen(output_filepath,"ab");
+	int len = strlen("=== All Tasks Completed ===\n");
+	sprintf(buf, "All Tasks report start\n");
+	fputs(buf, fp_output);
+
+	sprintf(buf,"RESULT: Total elapsed time: %.2f seconds\n",elapsed);
+	fputs(buf, fp_output);
+
+	sprintf(buf,"=== All Tasks report end ===\n");
+	fputs(buf, fp_output);
+
+	fflush(fp_output);
+	fclose(fp_output);	
+	buffer[0] = '\0';
 
 	printf("=== All Tasks Completed ===\n");
+	printf("=== All Tasks report start ===\n");
+	printf("RESULT: Total elapsed time: %.2f seconds\n",elapsed);
+	printf("=== All Tasks report end ===\n");
+
+
 	pthread_mutex_destroy(&lock);
 	pthread_mutex_destroy(&write_lock);
 	return 0;
@@ -477,9 +497,9 @@ void *runner1(void *param)
 
 	clock_t time1 = clock();
 	double elapsed = (double)(time1 - begin) / CLOCKS_PER_SEC;
-	printf("T1 RESULT: Total elapsed time: %.2f\n",elapsed);
+	printf("T1 RESULT: Total elapsed time: %.2f seconds\n",elapsed);
 	buffer[0] = '\0';
-	sprintf(buffer, "T1 RESULT: Total elapsed time: %.2f\n",elapsed);
+	sprintf(buffer, "T1 RESULT: Total elapsed time: %.2f seconds\n",elapsed);
 	fputs(buffer, fp_output);
 	printf("=== T1 Report End ===\n");
 	buffer[0] = '\0';
@@ -602,9 +622,9 @@ void *runner2(void *param)
 
 	clock_t time2 = clock();
 	double elapsed = (double)(time2 - begin) / CLOCKS_PER_SEC;
-	printf("T2 RESULT: Total elapsed time: %.2f\n",elapsed);
+	printf("T2 RESULT: Total elapsed time: %.2f seconds\n",elapsed);
 	buffer[0] = '\0';
-	sprintf(buffer, "T2 RESULT: Total elapsed time: %.2f\n",elapsed);
+	sprintf(buffer, "T2 RESULT: Total elapsed time: %.2f seconds\n",elapsed);
 	fputs(buffer, fp_output);
 	printf("=== T2 Report End ===\n");
 	buffer[0] = '\0';
@@ -828,9 +848,9 @@ void *runner3(void *param)
 
 	clock_t time3 = clock();
 	double elapsed = (double)(time3 - begin) / CLOCKS_PER_SEC;
-	printf("T3 RESULT: Total elapsed time: %.2f\n",elapsed);
+	printf("T3 RESULT: Total elapsed time: %.2f seconds\n",elapsed);
 	buffer[0] = '\0';
-	sprintf(buffer, "T3 RESULT: Total elapsed time: %.2f\n",elapsed);
+	sprintf(buffer, "T3 RESULT: Total elapsed time: %.2f seconds\n",elapsed);
 	fputs(buffer, fp_output);
 	printf("=== T3 Report End ===\n");
 	buffer[0] = '\0';
