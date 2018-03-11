@@ -107,7 +107,6 @@ int main(int argc, char *argv[]){
 			}			
 		}
 		else if(!strcmp(argv[2], "priority")){
-			printf("Set priority to \n");
 			priority_task = atoi(argv[3]);
 			if(!strcmp(argv[4], "low"))
 				priority = LOW;
@@ -135,23 +134,24 @@ int main(int argc, char *argv[]){
 		pthread_join(tid_task[0], NULL);
 	}
 	else if(mode == MULTI_THREAD){
-		if((policy == SCHED_RR) || (policy == SCHED_FIFO)){
+		if((policy == SCHED_RR) || (policy == SCHED_FIFO))
+		{
 			if (pthread_attr_setschedpolicy(&attr, policy) != 0)
 				fprintf(stderr, "Unable to set policy.\n");
 		}
 
 		if ( (argc == 2) || (argc == 4) )
 		{
-			schedparam.sched_priority = 1;
+			schedparam.sched_priority = 50;
 			pthread_attr_setschedparam(&attr, &schedparam);
 
-			for(int i = 0; i < NUM_THREADS; i++)
-				pthread_create(&tid_task[i], &attr, f[i], NULL);
+			pthread_create(&tid_task[0],&attr,runner1, NULL);
+			pthread_create(&tid_task[2],&attr,runner3, NULL);
+			pthread_create(&tid_task[1],&attr,runner2, NULL);
 		}
 		else if(priority == LOW)
 		{
 			pthread_attr_setschedpolicy(&attr, SCHED_FIFO);
-			printf("Priority set to: LOW\n");
 			/* Do we support priority change on all tasks or just one? Up to us...*/
 			schedparam.sched_priority = 1;
 			pthread_attr_setschedparam(&attr, &schedparam);
@@ -185,7 +185,6 @@ int main(int argc, char *argv[]){
 		else if(priority == HIGH)
 		{
 			pthread_attr_setschedpolicy(&attr, SCHED_FIFO);
-			printf("Priority set to: HIGH\n");
 			schedparam.sched_priority = 99;
 			pthread_attr_setschedparam(&attr, &schedparam);
 
@@ -216,9 +215,13 @@ int main(int argc, char *argv[]){
 
 		}
 
-		for(int i = 0; i < NUM_THREADS; i++){
+		pthread_join(tid_task[0],NULL);
+		pthread_join(tid_task[2],NULL);
+		pthread_join(tid_task[1],NULL); 
+
+		/*for(int i = 0; i < NUM_THREADS; i++){
 			pthread_join(tid_task[i],NULL);
-		}
+		} */
 	}	
 	else{
 		printf("***ERROR: Invalid mode selected).\n");
@@ -237,8 +240,11 @@ int main(int argc, char *argv[]){
 
 	char buf[1000];
 	fp_output = fopen(output_filepath,"ab");
-	int len = strlen("=== All Tasks Completed ===\n");
-	sprintf(buf, "All Tasks report start\n");
+	
+	sprintf(buf, "=== All Tasks Completed ===\n");
+	fputs(buf, fp_output);
+
+	sprintf(buf, "=== All Tasks report start ===\n");
 	fputs(buf, fp_output);
 
 	sprintf(buf,"RESULT: Total elapsed time: %.2f seconds\n",elapsed);
@@ -665,9 +671,9 @@ void *runner3(void *param)
 	/* do some work ... */
 	// printf("Thread 3\n");
 
-	double ratioPerFile[NUM_FILES];
-	int rowsPerFile[NUM_FILES];
-	int colsPerFile[NUM_FILES];
+	double* ratioPerFile = malloc(NUM_FILES*sizeof(double));
+	int* rowsPerFile = malloc(NUM_FILES*sizeof(int));
+	int* colsPerFile = malloc(NUM_FILES*sizeof(int));
 	
 	
 	int rowcount;
@@ -762,7 +768,7 @@ void *runner3(void *param)
 
         	CsvParser_destroy_row(row);
   		}
-    	CsvParser_destroy(csvparser);	
+    	CsvParser_destroy(csvparser);	 
 
 		//printf("READING FROM %s\n",csvfile);
 		//printf("Missing: %d Zero: %d Num Rows: %d Num Cols: %d\n",numMissing,numZero,rowcount,maxColumns);
