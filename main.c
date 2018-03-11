@@ -148,6 +148,10 @@ int main(int argc, char *argv[]){
 			pthread_create(&tid_task[0],&attr,runner1, NULL);
 			pthread_create(&tid_task[2],&attr,runner3, NULL);
 			pthread_create(&tid_task[1],&attr,runner2, NULL);
+
+			pthread_join(tid_task[0],NULL);
+			pthread_join(tid_task[2],NULL);
+			pthread_join(tid_task[1],NULL);			
 		}
 		else if(priority == LOW)
 		{
@@ -162,7 +166,11 @@ int main(int argc, char *argv[]){
 				pthread_attr_setschedparam(&attr, &schedparam);
 				pthread_create(&tid_task[0],&attr,runner1, NULL);
 				pthread_create(&tid_task[1],&attr,runner2, NULL);
-				pthread_create(&tid_task[2],&attr,runner3, NULL);	
+				pthread_create(&tid_task[2],&attr,runner3, NULL);
+
+				pthread_join(tid_task[0],NULL);
+				pthread_join(tid_task[2],NULL);
+				pthread_join(tid_task[1],NULL);						
 			}
 			else if (!strcmp(argv[3],"2"))
 			{
@@ -170,7 +178,11 @@ int main(int argc, char *argv[]){
 				schedparam.sched_priority = 99;
 				pthread_attr_setschedparam(&attr, &schedparam);
 				pthread_create(&tid_task[1],&attr,runner1, NULL);
-				pthread_create(&tid_task[2],&attr,runner3, NULL);				
+				pthread_create(&tid_task[2],&attr,runner3, NULL);
+
+				pthread_join(tid_task[0],NULL);
+				pthread_join(tid_task[1],NULL);
+				pthread_join(tid_task[2],NULL);									
 			}
 			else if (!strcmp(argv[3],"3"))
 			{
@@ -178,7 +190,11 @@ int main(int argc, char *argv[]){
 				schedparam.sched_priority = 99;
 				pthread_attr_setschedparam(&attr, &schedparam);
 				pthread_create(&tid_task[1],&attr,runner1, NULL);
-				pthread_create(&tid_task[2],&attr,runner2, NULL);				
+				pthread_create(&tid_task[2],&attr,runner2, NULL);	
+
+				pthread_join(tid_task[0],NULL);
+				pthread_join(tid_task[1],NULL);
+				pthread_join(tid_task[2],NULL);								
 			}
 
 		}
@@ -195,29 +211,34 @@ int main(int argc, char *argv[]){
 				pthread_attr_setschedparam(&attr, &schedparam);
 				pthread_create(&tid_task[1],&attr,runner2, NULL);
 				pthread_create(&tid_task[2],&attr,runner3, NULL);
+
+				pthread_join(tid_task[0],NULL);
+				pthread_join(tid_task[2],NULL);
+				pthread_join(tid_task[1],NULL);					
 			}
 			else if (!strcmp(argv[3],"2"))
 			{
-				pthread_create(&tid_task[0],&attr,runner2, NULL);
-				schedparam.sched_priority = 1;
-				pthread_attr_setschedparam(&attr, &schedparam);
-				pthread_create(&tid_task[1],&attr,runner1, NULL);
-				pthread_create(&tid_task[2],&attr,runner3, NULL);				
+				pthread_create(&tid_task[0],&attr,runner1, NULL);
+				pthread_create(&tid_task[1],&attr,runner2, NULL);
+				pthread_create(&tid_task[2],&attr,runner3, NULL);	
+
+				pthread_join(tid_task[0],NULL);
+				pthread_join(tid_task[2],NULL);
+				pthread_join(tid_task[1],NULL);								
 			}
 			else if (!strcmp(argv[3],"3"))
 			{
-				pthread_create(&tid_task[0],&attr,runner3, NULL);
-				schedparam.sched_priority = 1;
-				pthread_attr_setschedparam(&attr, &schedparam);
-				pthread_create(&tid_task[1],&attr,runner1, NULL);
-				pthread_create(&tid_task[2],&attr,runner2, NULL);				
+				pthread_create(&tid_task[0],&attr,runner1, NULL);
+				pthread_create(&tid_task[1],&attr,runner2, NULL);
+				pthread_create(&tid_task[2],&attr,runner3, NULL);	
+
+				pthread_join(tid_task[0],NULL);
+				pthread_join(tid_task[2],NULL);	
+				pthread_join(tid_task[1],NULL);							
 			}				
 
 		}
-
-		pthread_join(tid_task[0],NULL);
-		pthread_join(tid_task[2],NULL);
-		pthread_join(tid_task[1],NULL); 
+ 
 
 		/*for(int i = 0; i < NUM_THREADS; i++){
 			pthread_join(tid_task[i],NULL);
@@ -647,23 +668,6 @@ void *runner2(void *param)
 	    Also, find maximum, minimum, average of the numbers of rows and columns of 
 	    all files. 
 */
-
-int getNumRows(char* filename)
-{
-  	CsvParser *csvparser = CsvParser_new(filename, ",", 0);
-    CsvRow *row;	
-    int num;
-
-   		while ((row = CsvParser_getRow(csvparser)) ) 
-   		{
-        	num++;
-        	CsvParser_destroy_row(row);
-  		}
-    	CsvParser_destroy(csvparser);	
-
-    	return num;
-
-}
 
 void *runner3(void *param)
 {
