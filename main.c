@@ -79,6 +79,11 @@ int main(int argc, char *argv[]){
 	{
 		mode = SINGLE_THREAD;
 		single_thread_task = atoi(argv[2]);
+		if(single_thread_task < 1 || single_thread_task > 3){
+			printf("***ERROR: Please choose task 1, 2, or 3 for single threading mode.");
+			exit(1);
+		}
+
 	}
 	else if (!strcmp(argv[1], "multi") && argc == 2)
 	{
@@ -133,25 +138,25 @@ int main(int argc, char *argv[]){
 		pthread_join(tid_task[0], NULL);
 	}
 	else if(mode == MULTI_THREAD){
-		if((policy == SCHED_RR) || (policy == SCHED_FIFO)){
+		if((policy == SCHED_RR) || (policy == SCHED_FIFO))
+		{
 			if (pthread_attr_setschedpolicy(&attr, policy) != 0)
 				fprintf(stderr, "Unable to set policy.\n");
 		}
 
 		if ( (argc == 2) || (argc == 4) )
 		{
-			schedparam.sched_priority = 1;
+			schedparam.sched_priority = 50;
 			pthread_attr_setschedparam(&attr, &schedparam);
 
-			for(int i = 0; i < NUM_THREADS; i++)
-				pthread_create(&tid_task[i], &attr, f[i], NULL);
+			pthread_create(&tid_task[0],&attr,runner1, NULL);
+			pthread_create(&tid_task[2],&attr,runner3, NULL);
+			pthread_create(&tid_task[1],&attr,runner2, NULL);
 		}
 		else if(priority == LOW)
 		{
 			/* We cannot directly change SCHED_OTHER priority so we must set as FIFO or RR realtime scheduling */
 			pthread_attr_setschedpolicy(&attr, SCHED_FIFO);
-			printf("Priority set to: LOW\n");
-			/* Priority change works for most tasks but fails for some */
 			schedparam.sched_priority = 1;
 			pthread_attr_setschedparam(&attr, &schedparam);
 			if (!strcmp(argv[3],"1")) /* gives error when we give priority to any task other than 1 */
@@ -183,7 +188,6 @@ int main(int argc, char *argv[]){
 		else if(priority == HIGH)
 		{
 			pthread_attr_setschedpolicy(&attr, SCHED_FIFO);
-			printf("Priority set to: HIGH\n");
 			schedparam.sched_priority = 99;
 			pthread_attr_setschedparam(&attr, &schedparam);
 
@@ -213,9 +217,10 @@ int main(int argc, char *argv[]){
 			}				
 
 		}
-		for(int i = 0; i < NUM_THREADS; i++){
-			pthread_join(tid_task[i],NULL);
-		}
+
+		pthread_join(tid_task[0],NULL);
+		pthread_join(tid_task[2],NULL);
+		pthread_join(tid_task[1],NULL); 
 	}	
 	else{
 		printf("***ERROR: Invalid mode selected).\n");
@@ -236,13 +241,13 @@ int main(int argc, char *argv[]){
 	sprintf(buffer, "=== All Tasks Completed ===\n");
 	fputs(buffer, fp_output);
 
-	sprintf(buffer, "=== All Tasks report start ===\n");
+	sprintf(buffer, "=== All Tasks Report Start ===\n");
 	fputs(buffer, fp_output);
 
 	sprintf(buffer,"RESULT: Total elapsed time: %.3f seconds\n",elapsed);
 	fputs(buffer, fp_output);
 
-	sprintf(buffer,"=== All Tasks report end ===\n");
+	sprintf(buffer,"=== All Tasks Report End ===\n");
 	fputs(buffer, fp_output);
 
 	fflush(fp_output);
@@ -628,11 +633,10 @@ int getNumRows(char* filename)
 
 void *runner3(void *param)
 {
-	double ratioPerFile[NUM_FILES];
-	int rowsPerFile[NUM_FILES];
-	int colsPerFile[NUM_FILES];
-	char buffer[1000];
-	
+	double* ratioPerFile = malloc(NUM_FILES*sizeof(double));
+	int* rowsPerFile = malloc(NUM_FILES*sizeof(int));
+	int* colsPerFile = malloc(NUM_FILES*sizeof(int));
+	char buffer[100];
 	int rowcount;
 	int numMissing;
 
@@ -723,7 +727,7 @@ void *runner3(void *param)
 
         	CsvParser_destroy_row(row);
   		}
-    	CsvParser_destroy(csvparser);	
+    	CsvParser_destroy(csvparser);	 
 
 		pthread_mutex_lock(&lock);
     	double ratio = ((double)numMissing + (double)numZero) / ((double)maxColumns * (double)rowcount) * 100;
@@ -772,10 +776,10 @@ void *runner3(void *param)
 	buffer[0] = '\0';
 
 	/* do the reporting */
+	pthread_mutex_lock(&write_lock); 
 	/* print console*/
 	printf("=== T3 Report Start ===\n");
 	/* print output.txt*/
-	pthread_mutex_lock(&write_lock); 
 	fflush(fp_output);
 	fp_output = fopen(output_filepath,"ab");
 	fputs("=== T3 Report Start ===\n", fp_output);
